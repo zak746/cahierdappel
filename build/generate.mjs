@@ -408,10 +408,10 @@ const urls = [
 fs.mkdirSync(path.join(OUT, 'assets'), { recursive: true });
 fs.writeFileSync(path.join(OUT, 'assets', 'site.css'), CSS, 'utf8');
 
-const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#3d4a8a"/><text x="16" y="23" font-size="17" text-anchor="middle" fill="#fff" font-family="Georgia,serif">%</text></svg>`;
+const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#007aff"/><text x="16" y="23" font-size="17" text-anchor="middle" fill="#fff" font-family="-apple-system,'Plus Jakarta Sans',sans-serif" font-weight="800">%</text></svg>`;
 fs.writeFileSync(path.join(OUT, 'assets', 'favicon.svg'), favicon, 'utf8');
 
-const og = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"><rect width="1200" height="630" fill="#f4f1ea"/><rect x="0" y="0" width="1200" height="630" fill="none" stroke="#3d4a8a" stroke-width="16"/><text x="600" y="290" font-size="76" text-anchor="middle" fill="#232030" font-family="Georgia,serif" font-weight="700">Cahier d’Appel</text><text x="600" y="365" font-size="30" text-anchor="middle" fill="#3d4a8a" font-family="sans-serif">Calcul du pourcentage de présence, gratuit et instantané</text></svg>`;
+const og = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"><rect width="1200" height="630" fill="#f5f5f7"/><rect x="0" y="0" width="1200" height="630" fill="none" stroke="#007aff" stroke-width="16"/><text x="600" y="290" font-size="76" text-anchor="middle" fill="#1d1d1f" font-family="-apple-system,'Plus Jakarta Sans',sans-serif" font-weight="800">Cahier d’Appel</text><text x="600" y="365" font-size="30" text-anchor="middle" fill="#007aff" font-family="-apple-system,'Plus Jakarta Sans',sans-serif" font-weight="600">Calcul du pourcentage de présence, gratuit et instantané</text></svg>`;
 fs.writeFileSync(path.join(OUT, 'assets', 'og-cahierdappel.svg'), og, 'utf8');
 
 /* ---------- robots.txt + sitemap.xml ---------- */

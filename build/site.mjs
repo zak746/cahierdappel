@@ -266,10 +266,10 @@ export function layout(o) {
 <meta name="twitter:title" content="${o.title}">
 <meta name="twitter:description" content="${o.description}">
 <meta name="twitter:image" content="${url('/assets/og-cahierdappel.svg')}">
-<meta name="theme-color" content="#f4f2ee">
+<meta name="theme-color" content="#f5f5f7">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Source+Sans+3:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
 <link rel="stylesheet" href="/assets/site.css?v=${BUILD_ID}">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 ${SCRIPT_THEME_INLINE}
