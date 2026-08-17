@@ -102,7 +102,11 @@ statistiques de fin d’année, deux outils dédiés :</p>
 <h2>Questions fréquentes</h2>
 ${faqHtml()}
 
-<p class="lede" style="margin-top:2em"><a href="/formule-cahier-appel/">Voir le détail de la formule officielle et un exemple pas à pas →</a></p>
+<h2>Aller plus loin</h2>
+<ul>
+<li><a href="/formule-cahier-appel/">La formule officielle du cahier d’appel</a>, expliquée pas à pas avec un exemple chiffré.</li>
+<li><a href="/remplir-cahier-appel/">Comment remplir le cahier d’appel</a> : ce qu’on note chaque demi-journée, les retards, les erreurs à éviter.</li>
+</ul>
 
 <script>
 (function () {
@@ -129,8 +133,8 @@ ${faqHtml()}
 
   return layout({
     path: '/',
-    title: 'Calcul cahier d’appel : pourcentage de présence et d’absence gratuit',
-    description: 'Calculateur gratuit pour le cahier d’appel : pourcentage de présence et d’absence de la classe, calcul par élève et statistiques de fin d’année.',
+    title: 'Calcul cahier d’appel : calculateur de pourcentage en ligne gratuit',
+    description: 'Calculateur de cahier d’appel gratuit en ligne : calcul du pourcentage de présence et d’absence de la classe, par élève, et statistiques de l’année. Pour les enseignants.',
     body,
     ogType: 'website',
     jsonLd: [faqJsonLd()]
@@ -220,8 +224,8 @@ ${faqHtml()}
 
   return layout({
     path: '/par-eleve/',
-    title: 'Calcul du pourcentage d’absence par élève — cahier d’appel',
-    description: 'Calcule le pourcentage de présence et d’absence de chaque élève individuellement, avec la moyenne de la classe.',
+    title: 'Calculer les absences par élève : pourcentage cahier d’appel',
+    description: 'Calcule le pourcentage de présence et d’absence de chaque élève individuellement dans le cahier d’appel, avec la moyenne de la classe. Gratuit, sans inscription.',
     body,
     crumbs: [{ nom: 'Accueil', href: '/' }, { nom: 'Par élève', href: '/par-eleve/' }],
     jsonLd: [faqJsonLd()]
@@ -301,8 +305,8 @@ ${faqHtml()}
 
   return layout({
     path: '/statistiques-annee/',
-    title: 'Statistiques de présence cahier d’appel sur l’année — cumul automatique',
-    description: 'Cumule les demi-journées possibles et les absences de plusieurs périodes pour obtenir le pourcentage de présence annuel du cahier d’appel.',
+    title: 'Calcul cahier d’appel statistiques année : cumul de fin d’année',
+    description: 'Cumule les demi-journées possibles et les absences de chaque mois pour obtenir les statistiques de l’année du cahier d’appel et le pourcentage de présence annuel.',
     body,
     crumbs: [{ nom: 'Accueil', href: '/' }, { nom: 'Statistiques de l’année', href: '/statistiques-annee/' }],
     jsonLd: [faqJsonLd()]
@@ -354,6 +358,77 @@ ${faqHtml()}`;
   });
 }
 
+/* ================= REMPLIR LE CAHIER D'APPEL (guide) ================= */
+function pageRemplir() {
+  const body = `<p class="eyebrow">GUIDE PRATIQUE</p>
+<h1>Comment remplir le cahier d’appel : le guide complet</h1>
+<p class="lede">Ce que l’enseignant doit noter chaque demi-journée, comment compter les absences et les
+retards, et ce qu’il faut calculer en fin de mois et en fin d’année.</p>
+
+<h2>Ce qu’on note à chaque demi-journée</h2>
+<p>Le registre d’appel doit être tenu <strong>deux fois par jour</strong> : une fois le matin, une fois
+l’après-midi. À chaque appel, on relève pour chaque élève s’il est présent ou absent. C’est cette
+double saisie quotidienne qui fait que tout se compte ensuite en <strong>demi-journées</strong> et non en
+journées.</p>
+<div class="callout"><p>Une journée d’école = 2 demi-journées. Un élève absent toute la journée compte
+donc pour <strong>2 demi-journées d’absence</strong>, et non 1.</p></div>
+
+<h2>Faut-il noter les retards comme des absences ?</h2>
+<p>Non. Un élève qui arrive en retard mais qui assiste bien à la demi-journée est
+<strong>présent</strong> : on ne le compte pas dans les demi-journées d’absence. Le retard peut être noté
+séparément dans une colonne d’observations si ton école en tient une, mais il ne rentre pas dans le
+calcul du pourcentage.</p>
+
+<h2>Absences justifiées ou non justifiées</h2>
+<p>Pour le calcul du pourcentage de présence, on compte <strong>toutes</strong> les demi-journées
+d’absence, qu’elles soient justifiées ou pas : le taux de présence mesure le temps réellement passé en
+classe. La distinction justifié / non justifié sert au suivi de l’absentéisme et au signalement, pas au
+calcul du taux.</p>
+
+<h2>Ce qu’on calcule en fin de mois</h2>
+<p>La plupart des académies demandent, chaque fin de mois :</p>
+<ul>
+<li>le nombre de <strong>demi-journées possibles</strong> (élèves × demi-journées de classe du mois) ;</li>
+<li>le <strong>total des demi-journées d’absence</strong> de la classe ;</li>
+<li>le <strong>pourcentage de présence</strong> qui en découle.</li>
+</ul>
+<div class="calc-actions">
+  <a class="calc-btn" href="/">Faire le calcul du mois →</a>
+  <a class="calc-btn secondaire" href="/par-eleve/">Calculer par élève →</a>
+</div>
+
+<h2>Ce qu’on calcule en fin d’année</h2>
+<p>En fin d’année scolaire, on cumule les demi-journées possibles et les absences de tous les mois pour
+obtenir le taux de présence annuel de la classe. Garder le détail mois par mois permet de vérifier une
+valeur qui paraît fausse, et de fournir le détail si l’administration le demande.</p>
+<p><a href="/statistiques-annee/">Cumuler les statistiques de l’année →</a></p>
+
+<h2>Les erreurs les plus fréquentes</h2>
+<ul>
+<li><strong>Compter en journées au lieu de demi-journées</strong> : c’est l’erreur qui fausse le plus
+souvent le résultat, elle divise le total d’absences par deux.</li>
+<li><strong>Oublier de multiplier par le nombre d’élèves</strong> : les demi-journées possibles ne sont pas
+le nombre de demi-journées de classe, mais ce nombre × l’effectif.</li>
+<li><strong>Compter les jours fériés et les vacances</strong> : seules les demi-journées où la classe avait
+effectivement lieu entrent dans le calcul.</li>
+<li><strong>Inclure les retards</strong> dans les absences (voir plus haut).</li>
+</ul>
+
+<h2>Questions fréquentes</h2>
+${faqHtml()}
+
+<p class="lede" style="margin-top:2em"><a href="/formule-cahier-appel/">Voir le détail de la formule et un exemple chiffré →</a></p>`;
+
+  return layout({
+    path: '/remplir-cahier-appel/',
+    title: 'Comment remplir le cahier d’appel : guide pour l’enseignant',
+    description: 'Comment remplir le cahier d’appel : ce qu’on note chaque demi-journée, comment compter absences et retards, et ce qu’il faut calculer en fin de mois et d’année.',
+    body,
+    crumbs: [{ nom: 'Accueil', href: '/' }, { nom: 'Remplir le cahier d’appel', href: '/remplir-cahier-appel/' }],
+    jsonLd: [faqJsonLd()]
+  });
+}
+
 /* ================= Pages légales ================= */
 function pageMentionsLegales() {
   const body = `<p class="eyebrow">INFORMATIONS LÉGALES</p>
@@ -400,6 +475,7 @@ ecrire('', pageAccueil()); pages++;
 ecrire('par-eleve', pageParEleve()); pages++;
 ecrire('statistiques-annee', pageStatsAnnee()); pages++;
 ecrire('formule-cahier-appel', pageFormule()); pages++;
+ecrire('remplir-cahier-appel', pageRemplir()); pages++;
 ecrire('mentions-legales', pageMentionsLegales()); pages++;
 ecrire('confidentialite', pageConfidentialite()); pages++;
 
@@ -407,7 +483,8 @@ const urls = [
   { loc: url('/'), priority: '1.0' },
   { loc: url('/par-eleve/'), priority: '0.9' },
   { loc: url('/statistiques-annee/'), priority: '0.9' },
-  { loc: url('/formule-cahier-appel/'), priority: '0.8' }
+  { loc: url('/formule-cahier-appel/'), priority: '0.8' },
+  { loc: url('/remplir-cahier-appel/'), priority: '0.8' }
 ];
 
 /* ---------- Assets ---------- */

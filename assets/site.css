@@ -244,6 +244,26 @@ footer.site a:hover{color:var(--ink);text-decoration:none}
   .calc-resultat b{font-size:9px;letter-spacing:.08em;margin-bottom:3px}
   .calc-resultat span{font-size:1.25rem}
 
+  /* Tableau par élève : colonnes serrées, le nom prend la place restante. */
+  .tableau-eleves{margin:12px 0;font-size:14px}
+  .tableau-eleves th{font-size:8.5px;letter-spacing:.06em;padding:5px 4px}
+  .tableau-eleves td{padding:4px}
+  .tableau-eleves th:nth-child(2),.tableau-eleves td:nth-child(2){width:74px}
+  .tableau-eleves th:nth-child(3),.tableau-eleves td:nth-child(3){width:54px}
+  .tableau-eleves th:nth-child(4),.tableau-eleves td:nth-child(4){width:26px}
+  .tableau-eleves input[type="text"],.tableau-eleves input[type="number"]{padding:7px 8px;font-size:14px;border-radius:9px}
+  .tableau-eleves .pct{font-size:13px}
+  .tableau-eleves .suppr{font-size:16px;padding:2px 4px}
+
+  /* Lignes de période : nom sur toute la largeur, puis les 2 nombres côte à côte. */
+  .periode{padding:12px 13px;margin-bottom:9px;gap:9px;grid-template-columns:1fr 1fr}
+  .periode>div:first-child{grid-column:1/-1}
+  .periode label{font-size:9px;margin-bottom:4px;letter-spacing:.06em}
+  .periode input{padding:8px 10px;font-size:15px;border-radius:9px}
+
+  .calc-btn{padding:10px 18px;font-size:13.5px}
+  .calc-actions{gap:8px;margin-top:12px}
+
   footer.site{padding:22px 16px}
   footer.site .cols{grid-template-columns:1fr 1fr;gap:18px 14px}
   footer.site h2{font-size:.64rem;margin:0 0 7px}
