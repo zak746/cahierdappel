@@ -61,8 +61,9 @@ function faqJsonLd() {
 
 /* ================= ACCUEIL / Calcul classe entière ================= */
 function pageAccueil() {
-  const body = `<p class="eyebrow">CALCUL DE PRÉSENCE ET D’ABSENCE</p>
-<h1>Calcul cahier d’appel : pourcentage de présence en 5 secondes</h1>
+  const body = `<div class="intro-calc">
+<div class="intro"><p class="eyebrow">CALCUL DE PRÉSENCE ET D’ABSENCE</p>
+<h1>Calcul cahier d’appel : pourcentage de présence en 5 secondes</h1></div>
 <p class="lede">Entre le nombre d’élèves, la période concernée et le nombre de demi-journées d’absence :
 le pourcentage de présence et d’absence de ta classe s’affiche instantanément, avec le détail du calcul.</p>
 
@@ -87,6 +88,7 @@ le pourcentage de présence et d’absence de ta classe s’affiche instantaném
     <div class="calc-resultat accent"><b>% de présence</b><span id="cc-pct-presence">100 %</span></div>
     <div class="calc-resultat"><b>% d’absence</b><span id="cc-pct-absence">0 %</span></div>
   </div>
+</div>
 </div>
 
 <h2>Le suivi par élève ou sur l’année</h2>
@@ -137,8 +139,9 @@ ${faqHtml()}
 
 /* ================= PAR ÉLÈVE ================= */
 function pageParEleve() {
-  const body = `<p class="eyebrow">SUIVI INDIVIDUEL</p>
-<h1>Calcul du pourcentage d’absence par élève</h1>
+  const body = `<div class="intro-calc">
+<div class="intro"><p class="eyebrow">SUIVI INDIVIDUEL</p>
+<h1>Calcul du pourcentage d’absence par élève</h1></div>
 <p class="lede">Ajoute chaque élève avec son nombre de demi-journées d’absence sur la période : le
 pourcentage individuel se calcule automatiquement, ainsi que la moyenne de la classe.</p>
 
@@ -164,6 +167,7 @@ pourcentage individuel se calcule automatiquement, ainsi que la moyenne de la cl
     <div class="calc-resultat"><b>Élèves suivis</b><span id="pe-n">0</span></div>
     <div class="calc-resultat accent"><b>% de présence moyen</b><span id="pe-moyenne">—</span></div>
   </div>
+</div>
 </div>
 
 <h2>Pourquoi suivre l’absentéisme élève par élève ?</h2>
@@ -226,8 +230,9 @@ ${faqHtml()}
 
 /* ================= STATISTIQUES ANNÉE ================= */
 function pageStatsAnnee() {
-  const body = `<p class="eyebrow">CUMUL SUR L’ANNÉE</p>
-<h1>Statistiques de présence cumulées sur l’année</h1>
+  const body = `<div class="intro-calc">
+<div class="intro"><p class="eyebrow">CUMUL SUR L’ANNÉE</p>
+<h1>Statistiques de présence cumulées sur l’année</h1></div>
 <p class="lede">Ajoute une ligne par mois ou par période (avec ses demi-journées possibles et ses
 absences) : le cumul et le pourcentage annuel se calculent automatiquement.</p>
 
@@ -243,6 +248,7 @@ absences) : le cumul et le pourcentage annuel se calculent automatiquement.</p>
     <div class="calc-resultat accent"><b>% de présence annuel</b><span id="an-pct-presence">100 %</span></div>
     <div class="calc-resultat"><b>% d’absence annuel</b><span id="an-pct-absence">0 %</span></div>
   </div>
+</div>
 </div>
 
 <h2>Pourquoi cumuler par période plutôt que tout compter d’un coup ?</h2>

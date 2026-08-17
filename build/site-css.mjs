@@ -79,6 +79,20 @@ li{margin:.35em 0}
 .callout{background:var(--accent-faible);border:1px solid var(--accent-bord);border-radius:var(--r-md);padding:22px 28px;margin:24px 0}
 .callout p:last-child{margin-bottom:0}
 
+/* ---- Réordonnancement mobile : calculateur avant le texte explicatif ----
+   Le HTML garde l'ordre naturel (titre, description, calculateur) pour le SEO ;
+   sur mobile on affiche visuellement le calculateur juste après le titre, la
+   description passant après, pour que l'action soit immédiate sans perdre le
+   texte (toujours présent dans le DOM, donc toujours indexé). */
+.intro-calc{display:flex;flex-direction:column}
+.intro-calc>.intro{order:1}
+.intro-calc>.calc{order:2}
+.intro-calc>.lede{order:3;margin-top:4px}
+@media(min-width:641px){
+  .intro-calc>.lede{order:2}
+  .intro-calc>.calc{order:3}
+}
+
 /* ---- Calculateur ---- */
 .calc{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-md);padding:32px;margin:28px 0}
 .calc-champs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-bottom:8px}
