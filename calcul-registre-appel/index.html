@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Calcul cahier d’appel et registre d’appel : calculateur en ligne gratuit</title>
-<meta name="description" content="Calculateur gratuit de cahier d’appel et de registre d’appel : pourcentage de présence et d’absence de la classe, calcul par élève, statistiques de l’année. Pour les enseignants.">
-<link rel="canonical" href="https://cahierdappel.fr/">
+<title>Calcul du registre d’appel journalier : pourcentages et obligations</title>
+<meta name="description" content="Le registre d’appel journalier : ce qu’il doit contenir, qui le tient, combien de temps le conserver, et comment calculer les pourcentages de présence attendus par l’administration.">
+<link rel="canonical" href="https://cahierdappel.fr/calcul-registre-appel/">
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
 <meta name="author" content="Cahier d’Appel">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Cahier d’Appel — calcul des statistiques de présence">
 <meta property="og:locale" content="fr_FR">
-<meta property="og:title" content="Calcul cahier d’appel et registre d’appel : calculateur en ligne gratuit">
-<meta property="og:description" content="Calculateur gratuit de cahier d’appel et de registre d’appel : pourcentage de présence et d’absence de la classe, calcul par élève, statistiques de l’année. Pour les enseignants.">
-<meta property="og:url" content="https://cahierdappel.fr/">
+<meta property="og:title" content="Calcul du registre d’appel journalier : pourcentages et obligations">
+<meta property="og:description" content="Le registre d’appel journalier : ce qu’il doit contenir, qui le tient, combien de temps le conserver, et comment calculer les pourcentages de présence attendus par l’administration.">
+<meta property="og:url" content="https://cahierdappel.fr/calcul-registre-appel/">
 <meta property="og:image" content="https://cahierdappel.fr/assets/og-cahierdappel.svg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Calcul cahier d’appel et registre d’appel : calculateur en ligne gratuit">
-<meta name="twitter:description" content="Calculateur gratuit de cahier d’appel et de registre d’appel : pourcentage de présence et d’absence de la classe, calcul par élève, statistiques de l’année. Pour les enseignants.">
+<meta name="twitter:title" content="Calcul du registre d’appel journalier : pourcentages et obligations">
+<meta name="twitter:description" content="Le registre d’appel journalier : ce qu’il doit contenir, qui le tient, combien de temps le conserver, et comment calculer les pourcentages de présence attendus par l’administration.">
 <meta name="twitter:image" content="https://cahierdappel.fr/assets/og-cahierdappel.svg">
 <meta name="theme-color" content="#f5f5f7">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,6 +27,7 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <script>(function(){try{var t=localStorage.getItem('cahierdappel-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://cahierdappel.fr/"},{"@type":"ListItem","position":2,"name":"Registre d’appel","item":"https://cahierdappel.fr/calcul-registre-appel/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Comment calculer le pourcentage de présence dans le cahier d’appel ?","acceptedAnswer":{"@type":"Answer","text":"On divise le nombre de demi-journées de présence réelle par le nombre de demi-journées possibles (nombre d’élèves × nombre de demi-journées de la période), puis on multiplie par 100. On peut aussi faire 100 − le pourcentage d’absence."}},{"@type":"Question","name":"Comment calculer le pourcentage d’absence dans le cahier d’appel ?","acceptedAnswer":{"@type":"Answer","text":"On divise le nombre total de demi-journées d’absence par le nombre de demi-journées possibles, puis on multiplie par 100. Une journée d’absence complète compte pour 2 demi-journées."}},{"@type":"Question","name":"Qu’est-ce qu’une « demi-journée possible » ?","acceptedAnswer":{"@type":"Answer","text":"C’est le nombre d’élèves multiplié par le nombre de demi-journées de classe sur la période concernée (en général 2 demi-journées par jour d’école). C’est le nombre maximum théorique de présences si personne n’était absent."}},{"@type":"Question","name":"Faut-il compter les retards comme des absences ?","acceptedAnswer":{"@type":"Answer","text":"Non : un retard n’est pas une demi-journée d’absence tant que l’élève est bien présent en classe ce jour-là. Seule une absence complète sur la demi-journée doit être comptée."}},{"@type":"Question","name":"À quelle fréquence dois-je remplir ces statistiques ?","acceptedAnswer":{"@type":"Answer","text":"La plupart des académies demandent un calcul en fin de mois et un cumul en fin d’année scolaire. Utilisez l’outil « Statistiques de l’année » pour cumuler plusieurs périodes automatiquement."}},{"@type":"Question","name":"Cahier d’appel ou registre d’appel : quelle différence ?","acceptedAnswer":{"@type":"Answer","text":"Aucune différence de fond : « registre d’appel » (ou registre d’appel journalier) est le terme administratif officiel, « cahier d’appel » est le nom courant employé par les enseignants. Le calcul du pourcentage de présence est exactement le même dans les deux cas, et les calculateurs de ce site s’appliquent indifféremment à l’un ou à l’autre."}}]}</script>
 </head>
 <body>
@@ -69,7 +70,7 @@
       <a class="site-brand" href="/">Cahier <span>d’Appel</span></a>
       <div class="site-nav-sep"></div>
       <nav class="site-nav" id="site-nav" aria-label="Navigation principale">
-        <a href="/" class="site-nav-current" aria-current="page">Calculateur</a>
+        <a href="/">Calculateur</a>
         <a href="/par-eleve/">Par élève</a>
         <a href="/statistiques-annee/">Statistiques annuelles</a>
         <a href="/formule-cahier-appel/">La formule</a>
@@ -95,45 +96,55 @@
 </div>
 <div class="shell shell-main">
 <main class="site" id="contenu">
+<nav class="crumb" aria-label="Fil d’Ariane"><ol><li><a href="/">Accueil</a></li><li aria-current="page">Registre d’appel</li></ol></nav>
+<p class="eyebrow">REGISTRE D’APPEL JOURNALIER</p>
+<h1>Calcul du registre d’appel : ce que l’administration attend</h1>
+<p class="lede">Le registre d’appel journalier est le document officiel de suivi de la présence. Voici ce
+qu’il doit contenir, qui doit le tenir, combien de temps le conserver, et comment en tirer les
+pourcentages demandés.</p>
 
-<div class="intro-calc">
-<div class="intro"><p class="eyebrow">CALCUL DE PRÉSENCE ET D’ABSENCE</p>
-<h1>Calcul cahier d’appel : pourcentage de présence en 5 secondes</h1></div>
-<p class="lede">Entre le nombre d’élèves, la période concernée et le nombre de demi-journées d’absence :
-le pourcentage de présence et d’absence de ta classe s’affiche instantanément, avec le détail du calcul.
-Fonctionne pour le cahier comme pour le registre d’appel journalier.</p>
-
-<div class="calc" id="calc-classe">
-  <div class="calc-champs">
-    <div class="calc-champ">
-      <label for="cc-eleves">Nombre d’élèves</label>
-      <input type="number" id="cc-eleves" min="1" value="25" inputmode="numeric">
-    </div>
-    <div class="calc-champ">
-      <label for="cc-demijournees">Demi-journées de classe sur la période</label>
-      <input type="number" id="cc-demijournees" min="1" value="40" inputmode="numeric">
-    </div>
-    <div class="calc-champ">
-      <label for="cc-absences">Total des demi-journées d’absence</label>
-      <input type="number" id="cc-absences" min="0" value="0" inputmode="numeric">
-    </div>
-  </div>
-  <div class="calc-resultats">
-    <div class="calc-resultat"><b>Demi-journées possibles</b><span id="cc-possibles">1000</span></div>
-    <div class="calc-resultat"><b>Présences réelles</b><span id="cc-reelles">1000</span></div>
-    <div class="calc-resultat accent"><b>% de présence</b><span id="cc-pct-presence">100 %</span></div>
-    <div class="calc-resultat"><b>% d’absence</b><span id="cc-pct-absence">0 %</span></div>
-  </div>
-</div>
-</div>
-
-<h2>Le suivi par élève ou sur l’année</h2>
-<p>Pour calculer le pourcentage de chaque élève individuellement, ou cumuler plusieurs mois pour les
-statistiques de fin d’année, deux outils dédiés :</p>
+<h2>Registre d’appel ou cahier d’appel ?</h2>
+<p>C’est le même document. <strong>Registre d’appel journalier</strong> est le terme administratif que
+tu retrouveras dans les circulaires et les demandes de l’inspection ; <strong>cahier d’appel</strong> est
+le nom courant employé dans les salles des maîtres. Le mode de calcul est identique dans les deux cas :
+tout se compte en demi-journées.</p>
 <div class="calc-actions">
-  <a class="calc-btn" href="/par-eleve/">Calcul par élève →</a>
-  <a class="calc-btn secondaire" href="/statistiques-annee/">Statistiques de l’année →</a>
+  <a class="calc-btn" href="/">Calculer les pourcentages du registre →</a>
+  <a class="calc-btn secondaire" href="/registre-appel-imprimer/">Registre vierge à imprimer →</a>
 </div>
+
+<h2>Ce que le registre doit faire apparaître</h2>
+<ul>
+<li>La <strong>liste nominative</strong> des élèves inscrits dans la classe.</li>
+<li>Un relevé de présence <strong>par demi-journée</strong>, matin et après-midi — c’est le caractère
+« journalier » du registre.</li>
+<li>Les <strong>absences</strong>, avec l’information de leur justification ou non.</li>
+<li>Les <strong>totaux</strong> permettant d’établir les statistiques mensuelles et annuelles.</li>
+</ul>
+
+<h2>Qui le tient, qui le contrôle</h2>
+<p>Le registre est tenu par l’enseignant de la classe, sous la responsabilité du directeur d’école. Il
+peut être demandé lors d’une inspection, et il sert de pièce de référence en cas de signalement
+d’absentéisme ou de litige avec une famille. C’est pour cette raison que les chiffres doivent être
+cohérents avec les statistiques transmises : un total qui ne correspond pas au détail du registre est
+la première chose que l’administration repère.</p>
+
+<h2>Combien de temps le conserver</h2>
+<p>Les registres d’appel font partie des archives de l’école et se conservent plusieurs années — la
+durée exacte dépend des instructions de ta commune et de ton académie, l’école n’en étant pas
+propriétaire à titre personnel. En pratique, ne jette jamais un registre en fin d’année : remets-le à
+la direction.</p>
+
+<h2>Des pourcentages cohérents avec le registre</h2>
+<p>Les trois chiffres que l’administration croise le plus souvent :</p>
+<ul>
+<li>les <strong>demi-journées possibles</strong> (effectif × demi-journées de classe de la période) ;</li>
+<li>le <strong>total des demi-journées d’absence</strong> relevé dans le registre ;</li>
+<li>le <strong>taux de présence</strong> qui en découle.</li>
+</ul>
+<p>Si l’un des trois ne colle pas avec les deux autres, c’est presque toujours une erreur de comptage en
+journées au lieu de demi-journées. <a href="/formule-cahier-appel/">Le détail de la formule est ici</a>,
+et <a href="/remplir-cahier-appel/">les erreurs fréquentes sont listées là</a>.</p>
 
 <h2>Questions fréquentes</h2>
 <div class="faq">
@@ -144,39 +155,6 @@ statistiques de fin d’année, deux outils dédiés :</p>
 <details><summary>À quelle fréquence dois-je remplir ces statistiques ?</summary><p>La plupart des académies demandent un calcul en fin de mois et un cumul en fin d’année scolaire. Utilisez l’outil « Statistiques de l’année » pour cumuler plusieurs périodes automatiquement.</p></details>
 <details><summary>Cahier d’appel ou registre d’appel : quelle différence ?</summary><p>Aucune différence de fond : « registre d’appel » (ou registre d’appel journalier) est le terme administratif officiel, « cahier d’appel » est le nom courant employé par les enseignants. Le calcul du pourcentage de présence est exactement le même dans les deux cas, et les calculateurs de ce site s’appliquent indifféremment à l’un ou à l’autre.</p></details>
 </div>
-
-<h2>Aller plus loin</h2>
-<ul>
-<li><a href="/formule-cahier-appel/">La formule officielle du cahier d’appel</a>, expliquée pas à pas avec un exemple chiffré.</li>
-<li><a href="/remplir-cahier-appel/">Comment remplir le cahier d’appel</a> : ce qu’on note chaque demi-journée, les retards, les erreurs à éviter.</li>
-<li><a href="/registre-appel-imprimer/">Un registre d’appel à imprimer</a> : grille mensuelle vierge, matin et après-midi, à remplir au stylo.</li>
-<li><a href="/calcul-registre-appel/">Le registre d’appel journalier</a> : ce qu’il doit contenir, qui le tient, ce que l’administration contrôle.</li>
-<li><a href="/absenteisme-scolaire/">Absentéisme scolaire</a> : le seuil des 4 demi-journées et la procédure de signalement.</li>
-<li><a href="/interpreter-taux-presence/">Interpréter ton taux de présence</a> : ce que la moyenne cache et comment comparer deux mois.</li>
-</ul>
-
-<script>
-(function () {
-  var e = document.getElementById('cc-eleves'), d = document.getElementById('cc-demijournees'), a = document.getElementById('cc-absences');
-  var possibles = document.getElementById('cc-possibles'), reelles = document.getElementById('cc-reelles'),
-      pctP = document.getElementById('cc-pct-presence'), pctA = document.getElementById('cc-pct-absence');
-  function calc() {
-    var nE = Math.max(0, parseInt(e.value, 10) || 0);
-    var nD = Math.max(0, parseInt(d.value, 10) || 0);
-    var nA = Math.max(0, parseInt(a.value, 10) || 0);
-    var poss = nE * nD;
-    var reel = Math.max(0, poss - nA);
-    var pa = poss > 0 ? (nA / poss) * 100 : 0;
-    var pp = poss > 0 ? 100 - pa : 100;
-    possibles.textContent = poss.toLocaleString('fr-FR');
-    reelles.textContent = reel.toLocaleString('fr-FR');
-    pctA.textContent = pa.toFixed(2).replace('.00', '') + ' %';
-    pctP.textContent = pp.toFixed(2).replace('.00', '') + ' %';
-  }
-  [e, d, a].forEach(function (el) { el.addEventListener('input', calc); });
-  calc();
-})();
-</script>
 </main>
 </div>
 <div class="shell">

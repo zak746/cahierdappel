@@ -305,11 +305,19 @@ ${o.body}
         </ul>
       </div>
       <div>
-        <h2>Ressources</h2>
+        <h2>Comprendre</h2>
         <ul>
           <li><a href="/formule-cahier-appel/">La formule officielle</a></li>
           <li><a href="/remplir-cahier-appel/">Comment remplir le cahier d’appel</a></li>
+          <li><a href="/calcul-registre-appel/">Le registre d’appel journalier</a></li>
+          <li><a href="/absenteisme-scolaire/">Absentéisme : seuils et procédure</a></li>
+          <li><a href="/interpreter-taux-presence/">Interpréter le taux de présence</a></li>
           <li><a href="/registre-appel-imprimer/">Registre d’appel à imprimer</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Le site</h2>
+        <ul>
           <li><a href="/mentions-legales/">Mentions légales</a></li>
           <li><a href="/confidentialite/">Confidentialité</a></li>
           <li><a href="#" data-rouvrir-consent>Gérer mes cookies</a></li>

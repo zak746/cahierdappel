@@ -112,6 +112,9 @@ ${faqHtml()}
 <li><a href="/formule-cahier-appel/">La formule officielle du cahier d’appel</a>, expliquée pas à pas avec un exemple chiffré.</li>
 <li><a href="/remplir-cahier-appel/">Comment remplir le cahier d’appel</a> : ce qu’on note chaque demi-journée, les retards, les erreurs à éviter.</li>
 <li><a href="/registre-appel-imprimer/">Un registre d’appel à imprimer</a> : grille mensuelle vierge, matin et après-midi, à remplir au stylo.</li>
+<li><a href="/calcul-registre-appel/">Le registre d’appel journalier</a> : ce qu’il doit contenir, qui le tient, ce que l’administration contrôle.</li>
+<li><a href="/absenteisme-scolaire/">Absentéisme scolaire</a> : le seuil des 4 demi-journées et la procédure de signalement.</li>
+<li><a href="/interpreter-taux-presence/">Interpréter ton taux de présence</a> : ce que la moyenne cache et comment comparer deux mois.</li>
 </ul>
 
 <script>
@@ -534,6 +537,209 @@ ${faqHtml()}
   });
 }
 
+/* ================= CALCUL REGISTRE D'APPEL ================= */
+function pageRegistre() {
+  const body = `<p class="eyebrow">REGISTRE D’APPEL JOURNALIER</p>
+<h1>Calcul du registre d’appel : ce que l’administration attend</h1>
+<p class="lede">Le registre d’appel journalier est le document officiel de suivi de la présence. Voici ce
+qu’il doit contenir, qui doit le tenir, combien de temps le conserver, et comment en tirer les
+pourcentages demandés.</p>
+
+<h2>Registre d’appel ou cahier d’appel ?</h2>
+<p>C’est le même document. <strong>Registre d’appel journalier</strong> est le terme administratif que
+tu retrouveras dans les circulaires et les demandes de l’inspection ; <strong>cahier d’appel</strong> est
+le nom courant employé dans les salles des maîtres. Le mode de calcul est identique dans les deux cas :
+tout se compte en demi-journées.</p>
+<div class="calc-actions">
+  <a class="calc-btn" href="/">Calculer les pourcentages du registre →</a>
+  <a class="calc-btn secondaire" href="/registre-appel-imprimer/">Registre vierge à imprimer →</a>
+</div>
+
+<h2>Ce que le registre doit faire apparaître</h2>
+<ul>
+<li>La <strong>liste nominative</strong> des élèves inscrits dans la classe.</li>
+<li>Un relevé de présence <strong>par demi-journée</strong>, matin et après-midi — c’est le caractère
+« journalier » du registre.</li>
+<li>Les <strong>absences</strong>, avec l’information de leur justification ou non.</li>
+<li>Les <strong>totaux</strong> permettant d’établir les statistiques mensuelles et annuelles.</li>
+</ul>
+
+<h2>Qui le tient, qui le contrôle</h2>
+<p>Le registre est tenu par l’enseignant de la classe, sous la responsabilité du directeur d’école. Il
+peut être demandé lors d’une inspection, et il sert de pièce de référence en cas de signalement
+d’absentéisme ou de litige avec une famille. C’est pour cette raison que les chiffres doivent être
+cohérents avec les statistiques transmises : un total qui ne correspond pas au détail du registre est
+la première chose que l’administration repère.</p>
+
+<h2>Combien de temps le conserver</h2>
+<p>Les registres d’appel font partie des archives de l’école et se conservent plusieurs années — la
+durée exacte dépend des instructions de ta commune et de ton académie, l’école n’en étant pas
+propriétaire à titre personnel. En pratique, ne jette jamais un registre en fin d’année : remets-le à
+la direction.</p>
+
+<h2>Des pourcentages cohérents avec le registre</h2>
+<p>Les trois chiffres que l’administration croise le plus souvent :</p>
+<ul>
+<li>les <strong>demi-journées possibles</strong> (effectif × demi-journées de classe de la période) ;</li>
+<li>le <strong>total des demi-journées d’absence</strong> relevé dans le registre ;</li>
+<li>le <strong>taux de présence</strong> qui en découle.</li>
+</ul>
+<p>Si l’un des trois ne colle pas avec les deux autres, c’est presque toujours une erreur de comptage en
+journées au lieu de demi-journées. <a href="/formule-cahier-appel/">Le détail de la formule est ici</a>,
+et <a href="/remplir-cahier-appel/">les erreurs fréquentes sont listées là</a>.</p>
+
+<h2>Questions fréquentes</h2>
+${faqHtml()}`;
+
+  return layout({
+    path: '/calcul-registre-appel/',
+    title: 'Calcul du registre d’appel journalier : pourcentages et obligations',
+    description: 'Le registre d’appel journalier : ce qu’il doit contenir, qui le tient, combien de temps le conserver, et comment calculer les pourcentages de présence attendus par l’administration.',
+    body,
+    crumbs: [{ nom: 'Accueil', href: '/' }, { nom: 'Registre d’appel', href: '/calcul-registre-appel/' }],
+    jsonLd: [faqJsonLd()]
+  });
+}
+
+/* ================= ABSENTÉISME : SEUILS ET PROCÉDURE ================= */
+function pageAbsenteisme() {
+  const body = `<p class="eyebrow">SUIVI ET SIGNALEMENT</p>
+<h1>Absentéisme scolaire : seuils, procédure et rôle de l’enseignant</h1>
+<p class="lede">À partir de quand une absence devient un absentéisme à signaler, quelle procédure suivre,
+et ce que le registre d’appel doit permettre de prouver.</p>
+
+<div class="callout"><p>Cette page décrit le cadre général. Les modalités précises de signalement
+varient selon les académies et les écoles : <strong>vérifie toujours la procédure de ton
+établissement</strong> avant un envoi administratif.</p></div>
+
+<h2>Le principe : l’instruction est obligatoire</h2>
+<p>En France, l’instruction est obligatoire pour tous les enfants de <strong>3 à 16 ans</strong>. La
+personne responsable de l’enfant doit faire connaître le <strong>motif</strong> de chaque absence, sans
+délai. C’est ce qui distingue une absence justifiée d’une absence non justifiée — distinction qui n’a
+pas d’effet sur le calcul du taux de présence, mais qui est décisive pour le signalement.</p>
+
+<h2>Le seuil de référence : 4 demi-journées</h2>
+<p>Le seuil communément retenu est de <strong>4 demi-journées d’absence sans motif légitime ni excuses
+valables sur un même mois</strong>. À partir de ce niveau, l’absentéisme n’est plus traité comme un
+incident isolé : le directeur d’école engage un dialogue avec la famille et, si la situation persiste,
+transmet le dossier à l’autorité académique.</p>
+<div class="callout"><p><strong>Attention au comptage :</strong> 4 demi-journées, ce n’est que
+<strong>2 journées complètes</strong>. Le seuil est atteint beaucoup plus vite qu’on ne le croit
+lorsqu’on raisonne en journées.</p></div>
+
+<h2>La progression de la procédure</h2>
+<ol>
+<li><strong>Relevé.</strong> Les absences sont consignées dans le registre d’appel, demi-journée par
+demi-journée, avec l’indication du motif reçu ou de son absence.</li>
+<li><strong>Contact de la famille.</strong> L’enseignant signale la situation au directeur, qui prend
+contact avec les responsables de l’élève pour comprendre et rappeler l’obligation d’assiduité.</li>
+<li><strong>Dialogue formalisé.</strong> Si les absences continuent, un échange écrit et un plan
+d’action avec la famille sont mis en place.</li>
+<li><strong>Transmission à l’académie.</strong> En cas d’échec, le dossier part vers les services
+académiques, qui disposent de leurs propres leviers d’accompagnement et de mise en demeure.</li>
+</ol>
+
+<h2>Ce que ça change pour ta tenue du registre</h2>
+<p>Un registre correctement tenu est ta seule preuve en cas de contestation. Trois réflexes :</p>
+<ul>
+<li><strong>Noter au jour le jour</strong>, pas en reconstituant en fin de mois — une reconstitution est
+facilement contestable.</li>
+<li><strong>Distinguer justifié / non justifié</strong> dès la saisie : c’est cette colonne qui
+déclenche ou non le seuil des 4 demi-journées, pas le total brut.</li>
+<li><strong>Garder les justificatifs</strong> reçus, ou au moins la trace de leur réception.</li>
+</ul>
+<div class="calc-actions">
+  <a class="calc-btn" href="/par-eleve/">Repérer les élèves concernés →</a>
+  <a class="calc-btn secondaire" href="/remplir-cahier-appel/">Comment remplir le registre →</a>
+</div>
+
+<h2>Retards, absences prévues, sorties anticipées</h2>
+<p>Un <strong>retard</strong> n’est pas une demi-journée d’absence si l’élève assiste bien à la
+demi-journée. Une <strong>sortie anticipée</strong> autorisée non plus. En revanche une absence annoncée
+à l’avance reste une absence : être prévenu ne la rend pas justifiée au sens de l’assiduité, c’est le
+motif qui compte.</p>
+
+<h2>Questions fréquentes</h2>
+${faqHtml()}`;
+
+  return layout({
+    path: '/absenteisme-scolaire/',
+    title: 'Absentéisme scolaire : seuil des 4 demi-journées et procédure',
+    description: 'Absentéisme scolaire : le seuil de 4 demi-journées non justifiées par mois, la procédure de signalement étape par étape, et ce que le registre d’appel doit prouver.',
+    body,
+    crumbs: [{ nom: 'Accueil', href: '/' }, { nom: 'Absentéisme scolaire', href: '/absenteisme-scolaire/' }],
+    jsonLd: [faqJsonLd()]
+  });
+}
+
+/* ================= INTERPRÉTER LE TAUX ================= */
+function pageInterpreter() {
+  const body = `<p class="eyebrow">LIRE SES CHIFFRES</p>
+<h1>Taux de présence : comment l’interpréter</h1>
+<p class="lede">Un pourcentage seul ne dit pas grand-chose. Voici comment lire un taux de présence,
+ce qui relève de la variation normale, et ce qui mérite un regard plus attentif.</p>
+
+<h2>Ce qu’un taux de classe cache</h2>
+<p>Le taux global est une moyenne, et une moyenne masque les cas individuels. Une classe à
+<strong>96 % de présence</strong> peut correspondre à deux réalités très différentes :</p>
+<ul>
+<li>l’absentéisme est <strong>réparti</strong> : chaque élève a manqué une ou deux demi-journées dans le
+mois — situation banale, rien à signaler ;</li>
+<li>l’absentéisme est <strong>concentré</strong> : la quasi-totalité des absences vient d’un ou deux
+élèves — situation qui relève potentiellement du suivi individuel.</li>
+</ul>
+<p>Le taux global est identique dans les deux cas. C’est pour ça que le calcul par élève n’est pas un
+luxe : c’est lui qui distingue les deux.</p>
+<div class="calc-actions">
+  <a class="calc-btn" href="/par-eleve/">Voir la répartition par élève →</a>
+</div>
+
+<h2>Les ordres de grandeur</h2>
+<p>Sans valeur réglementaire — ce sont des repères de lecture, pas des seuils officiels :</p>
+<ul>
+<li><strong>Au-dessus de 95 %</strong> : profil habituel d’une classe d’école élémentaire sur un mois
+sans épidémie.</li>
+<li><strong>Entre 90 et 95 %</strong> : fréquent en hiver, ou sur un mois avec une vague de maladie.
+S’explique généralement tout seul.</li>
+<li><strong>En dessous de 90 %</strong> : vaut le coup de regarder la répartition par élève avant de
+transmettre — soit un événement collectif explique tout, soit quelques situations individuelles pèsent
+lourd.</li>
+</ul>
+
+<h2>L’effet trompeur des périodes courtes</h2>
+<p>Plus la période est courte, plus le taux est instable. Sur une semaine de 8 demi-journées avec
+20 élèves, il n’y a que 160 demi-journées possibles : <strong>une seule journée d’absence d’un élève
+fait bouger le taux de plus d’un point</strong>. Sur un mois complet, le même événement devient
+imperceptible.</p>
+<p>Conséquence pratique : ne compare pas un taux hebdomadaire à un taux mensuel, et méfie-toi d’une
+« chute » observée sur une période très courte.</p>
+
+<h2>Comparer d’un mois sur l’autre, correctement</h2>
+<p>Deux mois n’ont ni le même nombre de jours de classe, ni forcément le même effectif. Comparer les
+<strong>pourcentages</strong> est valable ; comparer les <strong>totaux d’absences bruts</strong> ne
+l’est pas. Un mois de 40 demi-journées et un mois de 32 demi-journées ne sont pas comparables en
+valeur absolue.</p>
+<p>Si ton effectif a changé en cours d’année (arrivée ou départ d’élèves), le nombre de demi-journées
+possibles change aussi : recalcule-le pour la période concernée plutôt que de reprendre celui du mois
+précédent.</p>
+<div class="calc-actions">
+  <a class="calc-btn" href="/statistiques-annee/">Cumuler proprement sur l’année →</a>
+  <a class="calc-btn secondaire" href="/absenteisme-scolaire/">Quand faut-il signaler ? →</a>
+</div>
+
+<h2>Questions fréquentes</h2>
+${faqHtml()}`;
+
+  return layout({
+    path: '/interpreter-taux-presence/',
+    title: 'Taux de présence : comment l’interpréter et le comparer',
+    description: 'Comment lire un taux de présence de classe : ce que la moyenne cache, les ordres de grandeur, l’effet des périodes courtes et comment comparer deux mois correctement.',
+    body,
+    crumbs: [{ nom: 'Accueil', href: '/' }, { nom: 'Interpréter le taux', href: '/interpreter-taux-presence/' }],
+    jsonLd: [faqJsonLd()]
+  });
+}
+
 /* ================= Pages légales ================= */
 function pageMentionsLegales() {
   const body = `<p class="eyebrow">INFORMATIONS LÉGALES</p>
@@ -582,6 +788,9 @@ ecrire('statistiques-annee', pageStatsAnnee()); pages++;
 ecrire('formule-cahier-appel', pageFormule()); pages++;
 ecrire('remplir-cahier-appel', pageRemplir()); pages++;
 ecrire('registre-appel-imprimer', pageImprimer()); pages++;
+ecrire('calcul-registre-appel', pageRegistre()); pages++;
+ecrire('absenteisme-scolaire', pageAbsenteisme()); pages++;
+ecrire('interpreter-taux-presence', pageInterpreter()); pages++;
 ecrire('mentions-legales', pageMentionsLegales()); pages++;
 ecrire('confidentialite', pageConfidentialite()); pages++;
 
@@ -591,7 +800,10 @@ const urls = [
   { loc: url('/statistiques-annee/'), priority: '0.9' },
   { loc: url('/formule-cahier-appel/'), priority: '0.8' },
   { loc: url('/remplir-cahier-appel/'), priority: '0.8' },
-  { loc: url('/registre-appel-imprimer/'), priority: '0.8' }
+  { loc: url('/registre-appel-imprimer/'), priority: '0.8' },
+  { loc: url('/calcul-registre-appel/'), priority: '0.9' },
+  { loc: url('/absenteisme-scolaire/'), priority: '0.7' },
+  { loc: url('/interpreter-taux-presence/'), priority: '0.7' }
 ];
 
 /* ---------- Assets ---------- */

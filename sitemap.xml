@@ -6,4 +6,7 @@
   <url><loc>https://cahierdappel.fr/formule-cahier-appel/</loc><priority>0.8</priority></url>
   <url><loc>https://cahierdappel.fr/remplir-cahier-appel/</loc><priority>0.8</priority></url>
   <url><loc>https://cahierdappel.fr/registre-appel-imprimer/</loc><priority>0.8</priority></url>
+  <url><loc>https://cahierdappel.fr/calcul-registre-appel/</loc><priority>0.9</priority></url>
+  <url><loc>https://cahierdappel.fr/absenteisme-scolaire/</loc><priority>0.7</priority></url>
+  <url><loc>https://cahierdappel.fr/interpreter-taux-presence/</loc><priority>0.7</priority></url>
 </urlset>
