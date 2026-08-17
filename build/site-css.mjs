@@ -229,14 +229,28 @@ footer.site a{color:var(--muted)}
 footer.site a:hover{color:var(--ink);text-decoration:none}
 
 @media(max-width:640px){
-  body{padding:10px;gap:10px;font-size:16px}
-  main.site{padding:22px 15px 28px}
-  h1{font-size:clamp(1.65rem,6.2vw,2.1rem);letter-spacing:-.035em}
-  h2{font-size:1.22rem;margin:1.9em 0 .55em}
-  .lede{font-size:1.02rem;line-height:1.6}
-  p{margin:0 0 .9em}
-  .calc{padding:22px}
-  .calc-resultat span{font-size:1.4rem}
+  body{padding:8px;gap:8px;font-size:16px}
+  header.site{padding:8px 14px;min-height:0}
+  .site-brand{font-size:17px}
+  main.site{padding:16px 12px 22px}
+  .eyebrow{font-size:9.5px;letter-spacing:.2em}
+  h1{font-size:clamp(1.35rem,5.6vw,1.7rem);line-height:1.15;letter-spacing:-.03em;margin:.15em 0 .3em}
+  h2{font-size:1.1rem;margin:1.5em 0 .5em}
+  .lede{font-size:.96rem;line-height:1.55}
+  p{margin:0 0 .8em}
+
+  /* Calculateur : compact au maximum pour tenir dans le premier écran mobile
+     sans scroll, tout en gardant les chiffres lisibles. */
+  .intro-calc>.calc{margin:10px 0 16px}
+  .calc{padding:14px}
+  .calc-champs{grid-template-columns:1fr;gap:10px;margin-bottom:4px}
+  .calc-champ label{font-size:10px;margin-bottom:4px;letter-spacing:.06em}
+  .calc-champ input{padding:9px 12px;font-size:16px;border-radius:12px}
+  .calc-resultats{grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+  .calc-resultat{padding:10px 8px}
+  .calc-resultat b{font-size:9px;letter-spacing:.08em;margin-bottom:3px}
+  .calc-resultat span{font-size:1.25rem}
+
   footer.site{padding:22px 16px}
   footer.site .cols{grid-template-columns:1fr 1fr;gap:18px 14px}
   footer.site h2{font-size:.64rem;margin:0 0 7px}
