@@ -107,7 +107,7 @@ li{margin:.35em 0}
   font-weight:700;padding:8px 10px;border-bottom:1px solid var(--line)}
 .tableau-eleves td{padding:6px 10px;border-bottom:1px solid var(--line)}
 .tableau-eleves input[type="text"],.tableau-eleves input[type="number"]{width:100%;padding:9px 10px;
-  border:1.5px solid var(--line);border-radius:10px;font-size:14.5px;font-family:var(--sans);background:var(--card);color:var(--ink)}
+  border:1.5px solid var(--line);border-radius:10px;font-size:16px;font-family:var(--sans);background:var(--card);color:var(--ink)}
 .tableau-eleves input:focus{outline:none;border-color:var(--accent)}
 .tableau-eleves .pct{font-weight:800;color:var(--ink);white-space:nowrap}
 .tableau-eleves .suppr{background:none;border:none;color:var(--mauvais);cursor:pointer;font-size:18px;padding:4px 8px}
@@ -270,19 +270,22 @@ footer.site a:hover{color:var(--ink);text-decoration:none}
   .tableau-eleves{margin:12px 0;font-size:14px}
   .tableau-eleves th{font-size:8.5px;letter-spacing:.06em;padding:5px 4px}
   .tableau-eleves td{padding:4px}
-  .tableau-eleves th:nth-child(2),.tableau-eleves td:nth-child(2){width:74px}
-  .tableau-eleves th:nth-child(3),.tableau-eleves td:nth-child(3){width:54px}
-  .tableau-eleves th:nth-child(4),.tableau-eleves td:nth-child(4){width:26px}
-  .tableau-eleves input[type="text"],.tableau-eleves input[type="number"]{padding:7px 8px;font-size:14px;border-radius:9px}
+  .tableau-eleves th:nth-child(2),.tableau-eleves td:nth-child(2){width:66px}
+  .tableau-eleves th:nth-child(3),.tableau-eleves td:nth-child(3){width:50px}
+  .tableau-eleves th:nth-child(4),.tableau-eleves td:nth-child(4){width:24px}
+  .tableau-eleves input[type="number"]{text-align:center}
+  /* 16px minimum : sous ce seuil, Safari iOS zoome automatiquement à la mise au
+     point du champ et ne dézoome jamais ensuite. */
+  .tableau-eleves input[type="text"],.tableau-eleves input[type="number"]{padding:7px 6px;font-size:16px;border-radius:9px}
   .tableau-eleves .pct{font-size:13px}
   .tableau-eleves .suppr{font-size:16px;padding:2px 4px}
 
   /* Tableau annuel : 5 colonnes serrées, le nom de période prend le reste. */
   .tableau-annee th:nth-child(2),.tableau-annee td:nth-child(2),
-  .tableau-annee th:nth-child(3),.tableau-annee td:nth-child(3){width:58px}
-  .tableau-annee th:nth-child(4),.tableau-annee td:nth-child(4){width:46px}
-  .tableau-annee th:last-child,.tableau-annee td:last-child{width:24px}
-  .tableau-annee input[type="number"]{padding:7px 5px;text-align:center}
+  .tableau-annee th:nth-child(3),.tableau-annee td:nth-child(3){width:60px}
+  .tableau-annee th:nth-child(4),.tableau-annee td:nth-child(4){width:44px}
+  .tableau-annee th:last-child,.tableau-annee td:last-child{width:22px}
+  .tableau-annee input[type="number"]{padding:7px 3px}
 
   .calc-btn{padding:10px 18px;font-size:13.5px}
   .calc-actions{gap:8px;margin-top:12px}
@@ -305,20 +308,25 @@ footer.site a:hover{color:var(--ink);text-decoration:none}
   h1{font-size:20pt}h2{font-size:14pt;margin:14pt 0 6pt}
   a{color:inherit;text-decoration:none}
 
-  /* Page « registre à imprimer » : seule la grille sort sur le papier, en paysage,
-     avec des traits assez nets pour être remplis au stylo. */
+  /* Page « registre à imprimer » : seule la grille sort sur le papier, en paysage.
+     Les traits sont en 1px noir et non en fractions de point : sous 1px, la
+     plupart des navigateurs arrondissent la bordure à zéro et la grille sort
+     vide. print-color-adjust force aussi le fond gris des en-têtes, que les
+     navigateurs suppriment par défaut à l'impression. */
   .grille-zone~h2,.grille-zone~p,.grille-zone~.calc-actions,.grille-zone~.faq,
   .intro-calc,.lede{display:none!important}
-  @page{size:landscape;margin:9mm}
+  @page{size:landscape;margin:8mm}
   .grille-zone{margin:0}
   .scroll-x{overflow:visible}
-  .grille{font-size:8pt;width:100%}
-  .grille th,.grille td{border:.5pt solid #444}
-  .grille th{background:#f0f0f0;font-size:7pt;color:#000}
-  .grille td{height:7.6mm}
+  .grille{font-size:8pt;width:100%;border-collapse:collapse;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .grille th,.grille td{border:1px solid #000!important;background:transparent}
+  .grille th{font-size:7pt;color:#000;background:#e8e8e8!important;padding:2px 1px}
+  .grille td{height:7.4mm}
   .grille .col-nom{min-width:0;width:20%}
-  .grille-note{font-size:7.5pt;color:#333;margin-top:4mm}
-  .grille-entete{margin-bottom:5mm}
-  .grille-entete span{color:#000;font-size:7.5pt}
-  .grille-entete i{border-bottom:.5pt solid #444}
+  .grille .col-total{background:#f2f2f2!important}
+  .grille-note{font-size:7.5pt;color:#000;margin-top:3mm}
+  .grille-entete{margin-bottom:4mm;display:grid;grid-template-columns:repeat(3,1fr);gap:8mm}
+  .grille-entete span{color:#000;font-size:8pt}
+  .grille-entete i{border-bottom:1px solid #000}
 }
