@@ -28,7 +28,8 @@ const NAV = [
   ['/par-eleve/', 'Par élève'],
   ['/statistiques-annee/', 'Statistiques annuelles'],
   ['/formule-cahier-appel/', 'La formule'],
-  ['/remplir-cahier-appel/', 'Remplir le cahier']
+  ['/remplir-cahier-appel/', 'Remplir le cahier'],
+  ['/registre-appel-imprimer/', 'À imprimer']
 ];
 
 function navHtml(pathCourant) {
@@ -308,6 +309,7 @@ ${o.body}
         <ul>
           <li><a href="/formule-cahier-appel/">La formule officielle</a></li>
           <li><a href="/remplir-cahier-appel/">Comment remplir le cahier d’appel</a></li>
+          <li><a href="/registre-appel-imprimer/">Registre d’appel à imprimer</a></li>
           <li><a href="/mentions-legales/">Mentions légales</a></li>
           <li><a href="/confidentialite/">Confidentialité</a></li>
           <li><a href="#" data-rouvrir-consent>Gérer mes cookies</a></li>

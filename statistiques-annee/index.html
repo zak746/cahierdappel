@@ -23,12 +23,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=mswzmq3k">
+<link rel="stylesheet" href="/assets/site.css?v=msx00spp">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <script>(function(){try{var t=localStorage.getItem('cahierdappel-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://cahierdappel.fr/"},{"@type":"ListItem","position":2,"name":"Statistiques de l’année","item":"https://cahierdappel.fr/statistiques-annee/"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Comment calculer le pourcentage de présence dans le cahier d’appel ?","acceptedAnswer":{"@type":"Answer","text":"On divise le nombre de demi-journées de présence réelle par le nombre de demi-journées possibles (nombre d’élèves × nombre de demi-journées de la période), puis on multiplie par 100. On peut aussi faire 100 − le pourcentage d’absence."}},{"@type":"Question","name":"Comment calculer le pourcentage d’absence dans le cahier d’appel ?","acceptedAnswer":{"@type":"Answer","text":"On divise le nombre total de demi-journées d’absence par le nombre de demi-journées possibles, puis on multiplie par 100. Une journée d’absence complète compte pour 2 demi-journées."}},{"@type":"Question","name":"Qu’est-ce qu’une « demi-journée possible » ?","acceptedAnswer":{"@type":"Answer","text":"C’est le nombre d’élèves multiplié par le nombre de demi-journées de classe sur la période concernée (en général 2 demi-journées par jour d’école). C’est le nombre maximum théorique de présences si personne n’était absent."}},{"@type":"Question","name":"Faut-il compter les retards comme des absences ?","acceptedAnswer":{"@type":"Answer","text":"Non : un retard n’est pas une demi-journée d’absence tant que l’élève est bien présent en classe ce jour-là. Seule une absence complète sur la demi-journée doit être comptée."}},{"@type":"Question","name":"À quelle fréquence dois-je remplir ces statistiques ?","acceptedAnswer":{"@type":"Answer","text":"La plupart des académies demandent un calcul en fin de mois et un cumul en fin d’année scolaire. Utilisez l’outil « Statistiques de l’année » pour cumuler plusieurs périodes automatiquement."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Comment calculer le pourcentage de présence dans le cahier d’appel ?","acceptedAnswer":{"@type":"Answer","text":"On divise le nombre de demi-journées de présence réelle par le nombre de demi-journées possibles (nombre d’élèves × nombre de demi-journées de la période), puis on multiplie par 100. On peut aussi faire 100 − le pourcentage d’absence."}},{"@type":"Question","name":"Comment calculer le pourcentage d’absence dans le cahier d’appel ?","acceptedAnswer":{"@type":"Answer","text":"On divise le nombre total de demi-journées d’absence par le nombre de demi-journées possibles, puis on multiplie par 100. Une journée d’absence complète compte pour 2 demi-journées."}},{"@type":"Question","name":"Qu’est-ce qu’une « demi-journée possible » ?","acceptedAnswer":{"@type":"Answer","text":"C’est le nombre d’élèves multiplié par le nombre de demi-journées de classe sur la période concernée (en général 2 demi-journées par jour d’école). C’est le nombre maximum théorique de présences si personne n’était absent."}},{"@type":"Question","name":"Faut-il compter les retards comme des absences ?","acceptedAnswer":{"@type":"Answer","text":"Non : un retard n’est pas une demi-journée d’absence tant que l’élève est bien présent en classe ce jour-là. Seule une absence complète sur la demi-journée doit être comptée."}},{"@type":"Question","name":"À quelle fréquence dois-je remplir ces statistiques ?","acceptedAnswer":{"@type":"Answer","text":"La plupart des académies demandent un calcul en fin de mois et un cumul en fin d’année scolaire. Utilisez l’outil « Statistiques de l’année » pour cumuler plusieurs périodes automatiquement."}},{"@type":"Question","name":"Cahier d’appel ou registre d’appel : quelle différence ?","acceptedAnswer":{"@type":"Answer","text":"Aucune différence de fond : « registre d’appel » (ou registre d’appel journalier) est le terme administratif officiel, « cahier d’appel » est le nom courant employé par les enseignants. Le calcul du pourcentage de présence est exactement le même dans les deux cas, et les calculateurs de ce site s’appliquent indifféremment à l’un ou à l’autre."}}]}</script>
 </head>
 <body>
 <a class="skip" href="#contenu">Aller au contenu</a>
@@ -75,6 +75,7 @@
         <a href="/statistiques-annee/" class="site-nav-current" aria-current="page">Statistiques annuelles</a>
         <a href="/formule-cahier-appel/">La formule</a>
         <a href="/remplir-cahier-appel/">Remplir le cahier</a>
+        <a href="/registre-appel-imprimer/">À imprimer</a>
       </nav>
       <button class="theme-toggle" id="theme-toggle" type="button"
         aria-label="Basculer entre le thème clair et sombre" title="Thème clair / sombre">
@@ -103,12 +104,17 @@
 absences) : le cumul et le pourcentage annuel se calculent automatiquement.</p>
 
 <div class="calc">
-  <div id="an-periodes"></div>
+  <table class="tableau-eleves tableau-annee" id="an-tableau">
+    <thead>
+      <tr><th>Période</th><th>Demi-j. possibles</th><th>Absences</th><th>% présence</th><th></th></tr>
+    </thead>
+    <tbody id="an-corps"></tbody>
+  </table>
   <div class="calc-actions">
     <button type="button" class="calc-btn secondaire" id="an-ajouter">+ Ajouter une période</button>
   </div>
 
-  <div class="calc-resultats" style="margin-top:28px">
+  <div class="calc-resultats" style="margin-top:24px">
     <div class="calc-resultat"><b>Demi-journées possibles (année)</b><span id="an-possibles">0</span></div>
     <div class="calc-resultat"><b>Absences (année)</b><span id="an-absences">0</span></div>
     <div class="calc-resultat accent"><b>% de présence annuel</b><span id="an-pct-presence">100 %</span></div>
@@ -129,33 +135,39 @@ demande, en plus du total annuel.</p>
 <details><summary>Qu’est-ce qu’une « demi-journée possible » ?</summary><p>C’est le nombre d’élèves multiplié par le nombre de demi-journées de classe sur la période concernée (en général 2 demi-journées par jour d’école). C’est le nombre maximum théorique de présences si personne n’était absent.</p></details>
 <details><summary>Faut-il compter les retards comme des absences ?</summary><p>Non : un retard n’est pas une demi-journée d’absence tant que l’élève est bien présent en classe ce jour-là. Seule une absence complète sur la demi-journée doit être comptée.</p></details>
 <details><summary>À quelle fréquence dois-je remplir ces statistiques ?</summary><p>La plupart des académies demandent un calcul en fin de mois et un cumul en fin d’année scolaire. Utilisez l’outil « Statistiques de l’année » pour cumuler plusieurs périodes automatiquement.</p></details>
+<details><summary>Cahier d’appel ou registre d’appel : quelle différence ?</summary><p>Aucune différence de fond : « registre d’appel » (ou registre d’appel journalier) est le terme administratif officiel, « cahier d’appel » est le nom courant employé par les enseignants. Le calcul du pourcentage de présence est exactement le même dans les deux cas, et les calculateurs de ce site s’appliquent indifféremment à l’un ou à l’autre.</p></details>
 </div>
 
 <script>
 (function () {
-  var zone = document.getElementById('an-periodes');
+  var corps = document.getElementById('an-corps');
   var compteur = 0;
 
   function ligne(nom) {
     compteur++;
-    var div = document.createElement('div');
-    div.className = 'periode';
-    div.innerHTML =
-      '<div><label>Période</label><input type="text" class="an-nom" value="' + (nom || 'Période ' + compteur) + '"></div>' +
-      '<div><label>Demi-j. possibles</label><input type="number" class="an-possibles" min="0" value="0" inputmode="numeric"></div>' +
-      '<div><label>Absences</label><input type="number" class="an-absences" min="0" value="0" inputmode="numeric"></div>' +
-      '<div><button type="button" class="suppr" aria-label="Supprimer">×</button></div>';
-    zone.appendChild(div);
-    div.querySelectorAll('input').forEach(function (i) { i.addEventListener('input', recalc); });
-    div.querySelector('.suppr').addEventListener('click', function () { div.remove(); recalc(); });
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td><input type="text" class="an-nom" value="' + (nom || 'Période ' + compteur) + '"></td>' +
+      '<td><input type="number" class="an-possibles" min="0" value="0" inputmode="numeric"></td>' +
+      '<td><input type="number" class="an-absences" min="0" value="0" inputmode="numeric"></td>' +
+      '<td class="pct an-pct">—</td>' +
+      '<td><button type="button" class="suppr" aria-label="Supprimer">×</button></td>';
+    corps.appendChild(tr);
+    tr.querySelectorAll('input').forEach(function (i) { i.addEventListener('input', recalc); });
+    tr.querySelector('.suppr').addEventListener('click', function () { tr.remove(); recalc(); });
   }
 
   function recalc() {
-    var lignes = zone.querySelectorAll('.periode');
+    var lignes = corps.querySelectorAll('tr');
     var totalPoss = 0, totalAbs = 0;
-    lignes.forEach(function (div) {
-      totalPoss += Math.max(0, parseInt(div.querySelector('.an-possibles').value, 10) || 0);
-      totalAbs += Math.max(0, parseInt(div.querySelector('.an-absences').value, 10) || 0);
+    lignes.forEach(function (tr) {
+      var poss = Math.max(0, parseInt(tr.querySelector('.an-possibles').value, 10) || 0);
+      var abs = Math.max(0, parseInt(tr.querySelector('.an-absences').value, 10) || 0);
+      totalPoss += poss;
+      totalAbs += abs;
+      tr.querySelector('.an-pct').textContent = poss > 0
+        ? Math.max(0, 100 - (abs / poss) * 100).toFixed(1).replace('.0', '') + ' %'
+        : '—';
     });
     var pa = totalPoss > 0 ? (totalAbs / totalPoss) * 100 : 0;
     var pp = totalPoss > 0 ? 100 - pa : 100;
@@ -188,6 +200,7 @@ demande, en plus du total annuel.</p>
         <ul>
           <li><a href="/formule-cahier-appel/">La formule officielle</a></li>
           <li><a href="/remplir-cahier-appel/">Comment remplir le cahier d’appel</a></li>
+          <li><a href="/registre-appel-imprimer/">Registre d’appel à imprimer</a></li>
           <li><a href="/mentions-legales/">Mentions légales</a></li>
           <li><a href="/confidentialite/">Confidentialité</a></li>
           <li><a href="#" data-rouvrir-consent>Gérer mes cookies</a></li>

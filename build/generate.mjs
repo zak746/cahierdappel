@@ -38,6 +38,10 @@ const FAQ = [
   {
     q: 'À quelle fréquence dois-je remplir ces statistiques ?',
     r: 'La plupart des académies demandent un calcul en fin de mois et un cumul en fin d’année scolaire. Utilisez l’outil « Statistiques de l’année » pour cumuler plusieurs périodes automatiquement.'
+  },
+  {
+    q: 'Cahier d’appel ou registre d’appel : quelle différence ?',
+    r: 'Aucune différence de fond : « registre d’appel » (ou registre d’appel journalier) est le terme administratif officiel, « cahier d’appel » est le nom courant employé par les enseignants. Le calcul du pourcentage de présence est exactement le même dans les deux cas, et les calculateurs de ce site s’appliquent indifféremment à l’un ou à l’autre.'
   }
 ];
 
@@ -65,7 +69,8 @@ function pageAccueil() {
 <div class="intro"><p class="eyebrow">CALCUL DE PRÉSENCE ET D’ABSENCE</p>
 <h1>Calcul cahier d’appel : pourcentage de présence en 5 secondes</h1></div>
 <p class="lede">Entre le nombre d’élèves, la période concernée et le nombre de demi-journées d’absence :
-le pourcentage de présence et d’absence de ta classe s’affiche instantanément, avec le détail du calcul.</p>
+le pourcentage de présence et d’absence de ta classe s’affiche instantanément, avec le détail du calcul.
+Fonctionne pour le cahier comme pour le registre d’appel journalier.</p>
 
 <div class="calc" id="calc-classe">
   <div class="calc-champs">
@@ -106,6 +111,7 @@ ${faqHtml()}
 <ul>
 <li><a href="/formule-cahier-appel/">La formule officielle du cahier d’appel</a>, expliquée pas à pas avec un exemple chiffré.</li>
 <li><a href="/remplir-cahier-appel/">Comment remplir le cahier d’appel</a> : ce qu’on note chaque demi-journée, les retards, les erreurs à éviter.</li>
+<li><a href="/registre-appel-imprimer/">Un registre d’appel à imprimer</a> : grille mensuelle vierge, matin et après-midi, à remplir au stylo.</li>
 </ul>
 
 <script>
@@ -133,8 +139,8 @@ ${faqHtml()}
 
   return layout({
     path: '/',
-    title: 'Calcul cahier d’appel : calculateur de pourcentage en ligne gratuit',
-    description: 'Calculateur de cahier d’appel gratuit en ligne : calcul du pourcentage de présence et d’absence de la classe, par élève, et statistiques de l’année. Pour les enseignants.',
+    title: 'Calcul cahier d’appel et registre d’appel : calculateur en ligne gratuit',
+    description: 'Calculateur gratuit de cahier d’appel et de registre d’appel : pourcentage de présence et d’absence de la classe, calcul par élève, statistiques de l’année. Pour les enseignants.',
     body,
     ogType: 'website',
     jsonLd: [faqJsonLd()]
@@ -241,12 +247,17 @@ function pageStatsAnnee() {
 absences) : le cumul et le pourcentage annuel se calculent automatiquement.</p>
 
 <div class="calc">
-  <div id="an-periodes"></div>
+  <table class="tableau-eleves tableau-annee" id="an-tableau">
+    <thead>
+      <tr><th>Période</th><th>Demi-j. possibles</th><th>Absences</th><th>% présence</th><th></th></tr>
+    </thead>
+    <tbody id="an-corps"></tbody>
+  </table>
   <div class="calc-actions">
     <button type="button" class="calc-btn secondaire" id="an-ajouter">+ Ajouter une période</button>
   </div>
 
-  <div class="calc-resultats" style="margin-top:28px">
+  <div class="calc-resultats" style="margin-top:24px">
     <div class="calc-resultat"><b>Demi-journées possibles (année)</b><span id="an-possibles">0</span></div>
     <div class="calc-resultat"><b>Absences (année)</b><span id="an-absences">0</span></div>
     <div class="calc-resultat accent"><b>% de présence annuel</b><span id="an-pct-presence">100 %</span></div>
@@ -265,29 +276,34 @@ ${faqHtml()}
 
 <script>
 (function () {
-  var zone = document.getElementById('an-periodes');
+  var corps = document.getElementById('an-corps');
   var compteur = 0;
 
   function ligne(nom) {
     compteur++;
-    var div = document.createElement('div');
-    div.className = 'periode';
-    div.innerHTML =
-      '<div><label>Période</label><input type="text" class="an-nom" value="' + (nom || 'Période ' + compteur) + '"></div>' +
-      '<div><label>Demi-j. possibles</label><input type="number" class="an-possibles" min="0" value="0" inputmode="numeric"></div>' +
-      '<div><label>Absences</label><input type="number" class="an-absences" min="0" value="0" inputmode="numeric"></div>' +
-      '<div><button type="button" class="suppr" aria-label="Supprimer">×</button></div>';
-    zone.appendChild(div);
-    div.querySelectorAll('input').forEach(function (i) { i.addEventListener('input', recalc); });
-    div.querySelector('.suppr').addEventListener('click', function () { div.remove(); recalc(); });
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td><input type="text" class="an-nom" value="' + (nom || 'Période ' + compteur) + '"></td>' +
+      '<td><input type="number" class="an-possibles" min="0" value="0" inputmode="numeric"></td>' +
+      '<td><input type="number" class="an-absences" min="0" value="0" inputmode="numeric"></td>' +
+      '<td class="pct an-pct">—</td>' +
+      '<td><button type="button" class="suppr" aria-label="Supprimer">×</button></td>';
+    corps.appendChild(tr);
+    tr.querySelectorAll('input').forEach(function (i) { i.addEventListener('input', recalc); });
+    tr.querySelector('.suppr').addEventListener('click', function () { tr.remove(); recalc(); });
   }
 
   function recalc() {
-    var lignes = zone.querySelectorAll('.periode');
+    var lignes = corps.querySelectorAll('tr');
     var totalPoss = 0, totalAbs = 0;
-    lignes.forEach(function (div) {
-      totalPoss += Math.max(0, parseInt(div.querySelector('.an-possibles').value, 10) || 0);
-      totalAbs += Math.max(0, parseInt(div.querySelector('.an-absences').value, 10) || 0);
+    lignes.forEach(function (tr) {
+      var poss = Math.max(0, parseInt(tr.querySelector('.an-possibles').value, 10) || 0);
+      var abs = Math.max(0, parseInt(tr.querySelector('.an-absences').value, 10) || 0);
+      totalPoss += poss;
+      totalAbs += abs;
+      tr.querySelector('.an-pct').textContent = poss > 0
+        ? Math.max(0, 100 - (abs / poss) * 100).toFixed(1).replace('.0', '') + ' %'
+        : '—';
     });
     var pa = totalPoss > 0 ? (totalAbs / totalPoss) * 100 : 0;
     var pp = totalPoss > 0 ? 100 - pa : 100;
@@ -429,6 +445,95 @@ ${faqHtml()}
   });
 }
 
+/* ================= REGISTRE D'APPEL À IMPRIMER ================= */
+function pageImprimer() {
+  const body = `<div class="intro-calc">
+<div class="intro"><p class="eyebrow">MODÈLE VIERGE</p>
+<h1>Registre d’appel à imprimer : grille mensuelle vierge</h1></div>
+<p class="lede">Choisis le nombre d’élèves et de jours de classe, puis imprime la grille. Chaque jour a
+deux cases (matin et après-midi) à cocher, plus une colonne de total par élève.</p>
+
+<div class="calc">
+  <div class="calc-champs">
+    <div class="calc-champ">
+      <label for="im-eleves">Nombre de lignes élèves</label>
+      <input type="number" id="im-eleves" min="1" max="40" value="25" inputmode="numeric">
+    </div>
+    <div class="calc-champ">
+      <label for="im-jours">Nombre de jours de classe</label>
+      <input type="number" id="im-jours" min="1" max="23" value="20" inputmode="numeric">
+    </div>
+  </div>
+  <div class="calc-actions">
+    <button type="button" class="calc-btn" id="im-imprimer">Imprimer la grille</button>
+  </div>
+</div>
+</div>
+
+<div class="grille-zone">
+  <div class="grille-entete">
+    <div><span>Classe</span><i></i></div>
+    <div><span>Enseignant</span><i></i></div>
+    <div><span>Mois / année</span><i></i></div>
+  </div>
+  <div class="scroll-x"><table class="grille" id="im-grille"></table></div>
+  <p class="grille-note">M = matin · S = soir (après-midi). Cocher les cases d’<strong>absence</strong>.
+  Total = nombre de demi-journées d’absence de l’élève sur le mois.</p>
+</div>
+
+<h2>Comment utiliser cette grille</h2>
+<p>Imprime-la en début de mois et coche une case à chaque demi-journée d’absence. En fin de mois,
+additionne les totaux de la colonne de droite : tu obtiens le total des demi-journées d’absence de la
+classe, le seul chiffre dont tu as besoin pour le calcul du pourcentage.</p>
+<div class="calc-actions">
+  <a class="calc-btn" href="/">Calculer le pourcentage du mois →</a>
+  <a class="calc-btn secondaire" href="/remplir-cahier-appel/">Comment remplir le registre →</a>
+</div>
+
+<h2>Questions fréquentes</h2>
+${faqHtml()}
+
+<script>
+(function () {
+  var nbE = document.getElementById('im-eleves'), nbJ = document.getElementById('im-jours');
+  var table = document.getElementById('im-grille');
+
+  function construire() {
+    var e = Math.min(40, Math.max(1, parseInt(nbE.value, 10) || 1));
+    var j = Math.min(23, Math.max(1, parseInt(nbJ.value, 10) || 1));
+    var h1 = '<tr><th rowspan="2" class="col-nom">Élève</th>';
+    var h2 = '<tr>';
+    for (var d = 1; d <= j; d++) {
+      h1 += '<th colspan="2">' + d + '</th>';
+      h2 += '<th>M</th><th>S</th>';
+    }
+    h1 += '<th rowspan="2" class="col-total">Total</th></tr>';
+    h2 += '</tr>';
+    var corps = '';
+    for (var n = 1; n <= e; n++) {
+      corps += '<tr><td class="col-nom"></td>';
+      for (var k = 0; k < j * 2; k++) corps += '<td></td>';
+      corps += '<td class="col-total"></td></tr>';
+    }
+    table.innerHTML = '<thead>' + h1 + h2 + '</thead><tbody>' + corps + '</tbody>';
+  }
+
+  [nbE, nbJ].forEach(function (i) { i.addEventListener('input', construire); });
+  document.getElementById('im-imprimer').addEventListener('click', function () { window.print(); });
+  construire();
+})();
+</script>`;
+
+  return layout({
+    path: '/registre-appel-imprimer/',
+    title: 'Registre d’appel à imprimer : grille mensuelle vierge gratuite',
+    description: 'Grille de registre d’appel journalier à imprimer gratuitement : matin et après-midi, nombre d’élèves et de jours au choix, total des demi-journées d’absence par élève.',
+    body,
+    crumbs: [{ nom: 'Accueil', href: '/' }, { nom: 'Registre à imprimer', href: '/registre-appel-imprimer/' }],
+    jsonLd: [faqJsonLd()]
+  });
+}
+
 /* ================= Pages légales ================= */
 function pageMentionsLegales() {
   const body = `<p class="eyebrow">INFORMATIONS LÉGALES</p>
@@ -476,6 +581,7 @@ ecrire('par-eleve', pageParEleve()); pages++;
 ecrire('statistiques-annee', pageStatsAnnee()); pages++;
 ecrire('formule-cahier-appel', pageFormule()); pages++;
 ecrire('remplir-cahier-appel', pageRemplir()); pages++;
+ecrire('registre-appel-imprimer', pageImprimer()); pages++;
 ecrire('mentions-legales', pageMentionsLegales()); pages++;
 ecrire('confidentialite', pageConfidentialite()); pages++;
 
@@ -484,7 +590,8 @@ const urls = [
   { loc: url('/par-eleve/'), priority: '0.9' },
   { loc: url('/statistiques-annee/'), priority: '0.9' },
   { loc: url('/formule-cahier-appel/'), priority: '0.8' },
-  { loc: url('/remplir-cahier-appel/'), priority: '0.8' }
+  { loc: url('/remplir-cahier-appel/'), priority: '0.8' },
+  { loc: url('/registre-appel-imprimer/'), priority: '0.8' }
 ];
 
 /* ---------- Assets ---------- */

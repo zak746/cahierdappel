@@ -117,12 +117,34 @@ li{margin:.35em 0}
 .calc-btn.secondaire{background:transparent;color:var(--accent);border:1.5px solid var(--accent-bord);box-shadow:none}
 .calc-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
 
-/* ---- Périodes (statistiques année) ---- */
-.periode{background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);padding:18px 20px;margin-bottom:12px;
-  display:grid;grid-template-columns:1fr repeat(2,120px) auto;gap:12px;align-items:end}
-.periode label{display:block;font-size:10px;font-weight:700;color:var(--soft);margin-bottom:6px;text-transform:uppercase;letter-spacing:.1em}
-.periode input{width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;font-size:15px;font-family:var(--sans);background:var(--bg);color:var(--ink)}
-@media (max-width:640px){.periode{grid-template-columns:1fr 1fr;}}
+/* ---- Tableau des périodes (statistiques année) ----
+   Même structure compacte que le tableau par élève : les intitulés vivent dans
+   l'en-tête au lieu d'être répétés à chaque ligne. */
+.tableau-annee th:nth-child(2),.tableau-annee td:nth-child(2),
+.tableau-annee th:nth-child(3),.tableau-annee td:nth-child(3){width:140px}
+.tableau-annee th:nth-child(4),.tableau-annee td:nth-child(4){width:90px}
+.tableau-annee th:last-child,.tableau-annee td:last-child{width:40px}
+
+/* ---- Grille de registre à imprimer ---- */
+.grille-zone{margin:8px 0 28px}
+.grille-entete{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:14px}
+.grille-entete>div{display:flex;align-items:baseline;gap:8px}
+.grille-entete span{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--soft);white-space:nowrap}
+.grille-entete i{flex:1;border-bottom:1px solid var(--line);height:1.2em}
+.scroll-x{overflow-x:auto}
+.grille{border-collapse:collapse;font-size:11px;width:100%}
+.grille th,.grille td{border:1px solid var(--line);text-align:center;padding:0}
+.grille th{background:var(--bg);font-weight:700;color:var(--muted);font-size:9.5px;padding:3px 1px}
+.grille td{height:22px;min-width:15px}
+.grille .col-nom{min-width:120px;width:22%;text-align:left;padding-left:6px}
+.grille .col-total{min-width:38px;background:var(--bg)}
+.grille-note{font-size:12px;color:var(--soft);margin:10px 0 0;line-height:1.5}
+@media(max-width:640px){
+  .grille-entete{grid-template-columns:1fr;gap:9px;margin-bottom:11px}
+  .grille{font-size:10px}
+  .grille .col-nom{min-width:78px}
+  .grille td{height:19px}
+}
 
 /* ---- FAQ ---- */
 .faq details{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);padding:16px 20px;margin:10px 0}
@@ -255,11 +277,12 @@ footer.site a:hover{color:var(--ink);text-decoration:none}
   .tableau-eleves .pct{font-size:13px}
   .tableau-eleves .suppr{font-size:16px;padding:2px 4px}
 
-  /* Lignes de période : nom sur toute la largeur, puis les 2 nombres côte à côte. */
-  .periode{padding:12px 13px;margin-bottom:9px;gap:9px;grid-template-columns:1fr 1fr}
-  .periode>div:first-child{grid-column:1/-1}
-  .periode label{font-size:9px;margin-bottom:4px;letter-spacing:.06em}
-  .periode input{padding:8px 10px;font-size:15px;border-radius:9px}
+  /* Tableau annuel : 5 colonnes serrées, le nom de période prend le reste. */
+  .tableau-annee th:nth-child(2),.tableau-annee td:nth-child(2),
+  .tableau-annee th:nth-child(3),.tableau-annee td:nth-child(3){width:58px}
+  .tableau-annee th:nth-child(4),.tableau-annee td:nth-child(4){width:46px}
+  .tableau-annee th:last-child,.tableau-annee td:last-child{width:24px}
+  .tableau-annee input[type="number"]{padding:7px 5px;text-align:center}
 
   .calc-btn{padding:10px 18px;font-size:13.5px}
   .calc-actions{gap:8px;margin-top:12px}
@@ -273,7 +296,7 @@ footer.site a:hover{color:var(--ink);text-decoration:none}
 }
 
 @media print{
-  :root{--bg:#fff;--card:#fff;--ink:#111;--muted:#444;--soft:#666;--line:#ddd;
+  :root{--bg:#fff;--card:#fff;--ink:#111;--muted:#444;--soft:#666;--line:#999;
         --voile:#fff;--carte-bord:#ddd;--accent-faible:#f4f8ff;--accent-bord:#dde8f8}
   header.site,footer.site,.crumb,.cta,.skip,.theme-toggle,.nav-burger,.consent,.pub{display:none!important}
   body{background:#fff;padding:0;font-size:12pt;display:block}
@@ -281,4 +304,21 @@ footer.site a:hover{color:var(--ink);text-decoration:none}
   .card,.calc{border:0;border-bottom:1px solid #ddd;border-radius:0;padding:8pt 0;margin:0;break-inside:avoid;background:#fff}
   h1{font-size:20pt}h2{font-size:14pt;margin:14pt 0 6pt}
   a{color:inherit;text-decoration:none}
+
+  /* Page « registre à imprimer » : seule la grille sort sur le papier, en paysage,
+     avec des traits assez nets pour être remplis au stylo. */
+  .grille-zone~h2,.grille-zone~p,.grille-zone~.calc-actions,.grille-zone~.faq,
+  .intro-calc,.lede{display:none!important}
+  @page{size:landscape;margin:9mm}
+  .grille-zone{margin:0}
+  .scroll-x{overflow:visible}
+  .grille{font-size:8pt;width:100%}
+  .grille th,.grille td{border:.5pt solid #444}
+  .grille th{background:#f0f0f0;font-size:7pt;color:#000}
+  .grille td{height:7.6mm}
+  .grille .col-nom{min-width:0;width:20%}
+  .grille-note{font-size:7.5pt;color:#333;margin-top:4mm}
+  .grille-entete{margin-bottom:5mm}
+  .grille-entete span{color:#000;font-size:7.5pt}
+  .grille-entete i{border-bottom:.5pt solid #444}
 }
