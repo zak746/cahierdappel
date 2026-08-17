@@ -255,7 +255,7 @@ export function layout(o) {
 <title>${o.title}</title>
 <meta name="description" content="${o.description}">
 <link rel="canonical" href="${canonical}">
-<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+<meta name="robots" content="${o.robots || 'index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1'}">
 <meta name="author" content="${SITE.auteur}">
 <meta property="og:type" content="${o.ogType || 'website'}">
 <meta property="og:site_name" content="${SITE.nomLong}">

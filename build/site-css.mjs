@@ -79,6 +79,14 @@ li{margin:.35em 0}
 .callout{background:var(--accent-faible);border:1px solid var(--accent-bord);border-radius:var(--r-md);padding:22px 28px;margin:24px 0}
 .callout p:last-child{margin-bottom:0}
 
+/* Grille de rattrapage de la page 404. */
+.liens-404{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:28px 0;padding:0;list-style:none}
+.liens-404 li{margin:0}
+.liens-404 a{display:block;height:100%;padding:20px 22px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--card);color:var(--ink);text-decoration:none}
+.liens-404 a:hover,.liens-404 a:focus-visible{border-color:var(--accent-bord);background:var(--accent-faible)}
+.liens-404 b{display:block;font-size:1.02rem}
+.liens-404 span{display:block;margin-top:4px;font-size:.86rem;color:var(--muted)}
+
 /* ---- Réordonnancement mobile : calculateur avant le texte explicatif ----
    Le HTML garde l'ordre naturel (titre, description, calculateur) pour le SEO ;
    sur mobile on affiche visuellement le calculateur juste après le titre, la

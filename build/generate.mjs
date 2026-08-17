@@ -17,8 +17,16 @@ function ecrire(relPath, html) {
   fs.writeFileSync(dest, html, 'utf8');
 }
 
-/* ================= FAQ commune (schema.org FAQPage) ================= */
-const FAQ = [
+/* ================= FAQ par page (schema.org FAQPage) =================
+   Chaque page a ses propres questions. Le même bloc répété sur les neuf pages
+   faisait deux dégâts : une part importante de chaque page était du texte
+   identique aux autres, et neuf FAQPage rigoureusement semblables étaient
+   déclarés à Google, qui n'en retient alors au mieux qu'un seul. Des questions
+   propres au sujet de la page couvrent en plus neuf jeux de requêtes distincts
+   au lieu d'un. Les questions ci-dessous sont toutes rendues visibles par
+   faqHtml() : une réponse balisée mais absente de la page est une infraction
+   aux règles de Google sur les données structurées. */
+const FAQ_GENERALE = [
   {
     q: 'Comment calculer le pourcentage de présence dans le cahier d’appel ?',
     r: 'On divise le nombre de demi-journées de présence réelle par le nombre de demi-journées possibles (nombre d’élèves × nombre de demi-journées de la période), puis on multiplie par 100. On peut aussi faire 100 − le pourcentage d’absence.'
@@ -45,17 +53,236 @@ const FAQ = [
   }
 ];
 
-function faqHtml() {
+const FAQ_PAR_PAGE = {
+  accueil: FAQ_GENERALE,
+
+  parEleve: [
+    {
+      q: 'Comment calculer le taux d’absence d’un seul élève ?',
+      r: 'On divise ses demi-journées d’absence par le nombre de demi-journées de classe de la période, puis on multiplie par 100. Le dénominateur ne dépend pas de l’effectif : pour un élève seul, c’est simplement le nombre de demi-journées d’école de la période.'
+    },
+    {
+      q: 'Pourquoi le pourcentage d’un élève diffère-t-il de celui de la classe ?',
+      r: 'Le taux de la classe rapporte toutes les absences à l’effectif entier : une absence longue d’un seul élève y est diluée. Le taux individuel rapporte les absences de l’élève à sa seule scolarité possible, ce qui fait ressortir les situations que la moyenne de classe masque.'
+    },
+    {
+      q: 'À partir de quel taux d’absence individuel faut-il signaler un élève ?',
+      r: 'Le signalement ne se déclenche pas sur un pourcentage mais sur un décompte : quatre demi-journées d’absence sans motif légitime dans le même mois. Le pourcentage sert au suivi et au dialogue avec la famille, pas au déclenchement de la procédure.'
+    },
+    {
+      q: 'Faut-il distinguer les absences justifiées des absences non justifiées ?',
+      r: 'Oui pour la procédure administrative, qui ne considère que les absences sans motif légitime. Pour le calcul du taux de présence, on compte en général toutes les absences : l’élève n’était pas en classe, justifié ou non. Tenez deux colonnes si votre école demande les deux chiffres.'
+    },
+    {
+      q: 'Combien de demi-journées compter pour un élève arrivé en cours d’année ?',
+      r: 'On ne compte que les demi-journées écoulées depuis son inscription. Compter la période entière ferait apparaître un taux d’absence artificiellement élevé pour un élève qui n’était pas encore dans la classe.'
+    }
+  ],
+
+  statsAnnee: [
+    {
+      q: 'Comment cumuler les pourcentages de présence de plusieurs périodes ?',
+      r: 'On n’additionne pas les pourcentages et on n’en fait pas la moyenne : cela fausse le résultat dès que les périodes n’ont pas la même durée. On additionne les demi-journées d’absence d’un côté, les demi-journées possibles de l’autre, et on calcule le pourcentage une seule fois sur ces deux totaux.'
+    },
+    {
+      q: 'Pourquoi la moyenne des pourcentages est-elle fausse ?',
+      r: 'Parce qu’elle donne le même poids à une période de deux semaines et à une période de dix. Une classe à 99 % sur une période courte et 90 % sur une période longue n’est pas à 94,5 % sur l’année : elle est plus proche de 91 %. Seul le cumul des demi-journées donne le bon chiffre.'
+    },
+    {
+      q: 'Combien de demi-journées compte une année scolaire ?',
+      r: 'Cela dépend du calendrier de l’académie et du nombre de jours de classe hebdomadaires de l’école. On compte les jours d’école réellement travaillés sur chaque période, multipliés par deux, en retirant les jours fériés et les ponts. Mieux vaut saisir période par période que d’appliquer un chiffre annuel générique.'
+    },
+    {
+      q: 'Faut-il refaire le calcul à chaque fin de période ?',
+      r: 'La plupart des écoles demandent un relevé en fin de mois ou de période, plus un cumul en fin d’année. Saisir chaque période au fur et à mesure évite de tout reprendre en juin, et le cumul annuel se met à jour tout seul.'
+    }
+  ],
+
+  formule: [
+    {
+      q: 'Quelle est la formule du pourcentage de présence ?',
+      r: 'Pourcentage de présence = (demi-journées possibles − demi-journées d’absence) ÷ demi-journées possibles × 100. Les demi-journées possibles valent : nombre d’élèves × nombre de demi-journées de classe de la période.'
+    },
+    {
+      q: 'Comment calculer le pourcentage d’absence ?',
+      r: 'Pourcentage d’absence = demi-journées d’absence ÷ demi-journées possibles × 100. C’est le complément du taux de présence : les deux additionnés font toujours 100.'
+    },
+    {
+      q: 'Pourquoi calculer en demi-journées et non en journées ?',
+      r: 'Parce que l’appel se fait deux fois par jour et qu’un élève peut manquer la matinée et être présent l’après-midi. La demi-journée est l’unité de l’appel comme du signalement administratif, qui se compte en demi-journées manquées.'
+    },
+    {
+      q: 'Une journée entière d’absence compte pour combien ?',
+      r: 'Pour deux demi-journées. C’est l’erreur de calcul la plus fréquente : compter une journée pour une unité divise le taux d’absence par deux.'
+    },
+    {
+      q: 'Comment vérifier que mon résultat est cohérent ?',
+      r: 'Deux contrôles simples : le taux de présence et le taux d’absence doivent totaliser 100, et le nombre de demi-journées d’absence ne peut jamais dépasser le nombre de demi-journées possibles. Si l’un des deux échoue, l’erreur porte sur le nombre de demi-journées de la période.'
+    }
+  ],
+
+  remplir: [
+    {
+      q: 'Que doit-on inscrire dans le cahier d’appel chaque jour ?',
+      r: 'Les élèves absents à chacune des deux demi-journées, et le motif quand il est connu. Le cahier sert de preuve de l’appel : il se remplit au moment de l’appel, pas reconstitué en fin de semaine.'
+    },
+    {
+      q: 'Comment noter un élève arrivé en retard ?',
+      r: 'On le note présent, avec une mention de retard. Un retard n’est pas une demi-journée d’absence dès lors que l’élève a bien été en classe sur la demi-journée, et il ne doit donc pas entrer dans le décompte des absences.'
+    },
+    {
+      q: 'Comment noter une absence justifiée par les parents ?',
+      r: 'On note l’absence et son motif. Elle reste une demi-journée d’absence dans le décompte de présence ; ce qui change, c’est qu’elle ne compte pas dans les quatre demi-journées sans motif légitime qui déclenchent le signalement.'
+    },
+    {
+      q: 'Que faire en cas d’erreur dans le cahier d’appel ?',
+      r: 'On barre proprement sans effacer ni surcharger, on écrit la correction à côté et on la date. Le cahier d’appel est un document susceptible d’être produit en cas de litige : une rature lisible vaut mieux qu’une case repassée.'
+    },
+    {
+      q: 'Le cahier d’appel peut-il être tenu au format numérique ?',
+      r: 'Beaucoup d’écoles utilisent un outil numérique, souvent doublé d’un support papier pour les sorties et les remplacements. Vérifiez ce que votre école et votre circonscription attendent : la forme varie, l’obligation de tenir l’appel deux fois par jour, non.'
+    }
+  ],
+
+  imprimer: [
+    {
+      q: 'Comment imprimer une grille d’appel vierge ?',
+      r: 'Renseignez le nombre d’élèves et le mois, puis lancez l’impression : la grille se met en page seule en paysage, avec une colonne par demi-journée et une ligne par élève. Aucun logiciel de traitement de texte n’est nécessaire.'
+    },
+    {
+      q: 'Pourquoi la grille s’imprime-t-elle en paysage ?',
+      r: 'Parce qu’un mois compte une quarantaine de demi-journées : en portrait, les colonnes deviennent trop étroites pour être cochées à la main. Le format paysage est imposé automatiquement à l’impression.'
+    },
+    {
+      q: 'Les bordures du tableau n’apparaissent pas à l’impression, que faire ?',
+      r: 'Vérifiez que l’option « graphiques d’arrière-plan » est activée dans la fenêtre d’impression du navigateur. La grille demande explicitement l’impression des couleurs, mais certains navigateurs laissent l’utilisateur passer outre.'
+    },
+    {
+      q: 'Peut-on écrire les noms des élèves avant d’imprimer ?',
+      r: 'Oui : la colonne des noms est saisissable à l’écran et se retrouve telle quelle sur le papier. C’est utile pour une classe stable ; pour un remplacement, mieux vaut imprimer la grille vide.'
+    }
+  ],
+
+  registre: [
+    {
+      q: 'Le registre d’appel journalier est-il obligatoire ?',
+      r: 'Oui. L’appel se fait à chaque demi-journée de classe et doit être consigné. Le registre est le document qui atteste de cette obligation, et il peut être demandé par l’inspection comme en cas de litige avec une famille.'
+    },
+    {
+      q: 'Quelle différence entre cahier d’appel et registre d’appel ?',
+      r: 'Aucune sur le fond : « registre d’appel journalier » est le terme administratif, « cahier d’appel » l’usage courant des enseignants. Le calcul du pourcentage de présence est identique dans les deux cas.'
+    },
+    {
+      q: 'Quels chiffres l’administration attend-elle exactement ?',
+      r: 'Le plus souvent : l’effectif de la classe, le nombre de demi-journées d’absence de la période, et le pourcentage de présence qui en découle. Certaines circonscriptions demandent aussi la distinction entre absences justifiées et non justifiées.'
+    },
+    {
+      q: 'Combien de temps faut-il conserver le registre d’appel ?',
+      r: 'Les registres se conservent plusieurs années au titre des archives de l’école ; la durée exacte est fixée par les instructions d’archivage applicables à votre académie. Ne jetez pas un registre en fin d’année sans avoir vérifié auprès de la direction.'
+    }
+  ],
+
+  absenteisme: [
+    {
+      q: 'À partir de combien d’absences parle-t-on d’absentéisme ?',
+      r: 'Le seuil de référence est de quatre demi-journées d’absence sans motif légitime dans le même mois. En dessous, l’enseignant relance la famille ; au-delà, la situation est signalée à la direction, qui engage la procédure.'
+    },
+    {
+      q: 'Les absences justifiées comptent-elles dans le seuil ?',
+      r: 'Non. Seules les absences sans motif légitime entrent dans le décompte des quatre demi-journées. Une maladie signalée par la famille reste une absence dans le taux de présence, mais elle ne déclenche pas la procédure.'
+    },
+    {
+      q: 'Quel est le rôle de l’enseignant dans la procédure ?',
+      r: 'Tenir l’appel et le registre, alerter la famille dès les premières absences répétées, et transmettre à la direction quand le seuil est atteint. La suite de la procédure relève de la direction et des services académiques, pas de l’enseignant seul.'
+    },
+    {
+      q: 'Que se passe-t-il après un signalement ?',
+      r: 'La direction convoque la famille pour rappeler l’obligation d’assiduité et chercher une solution. Si les absences persistent, le dossier remonte aux services académiques, qui disposent de leurs propres moyens d’action. L’objectif reste le retour en classe, pas la sanction.'
+    },
+    {
+      q: 'Comment repérer un absentéisme qui s’installe ?',
+      r: 'Le taux mensuel par élève est plus parlant que le taux de classe : il fait apparaître les absences répétées d’un seul enfant, que la moyenne de la classe dissimule. Un élève dont le taux d’absence monte de mois en mois mérite un signalement avant d’atteindre le seuil.'
+    }
+  ],
+
+  interpreter: [
+    {
+      q: 'Qu’est-ce qu’un bon taux de présence pour une classe ?',
+      r: 'Une classe se situe couramment entre 92 et 97 % de présence sur une période sans épidémie. En dessous de 90 %, il vaut la peine de regarder la répartition : soit une épidémie a touché tout le monde, soit quelques élèves concentrent l’essentiel des absences.'
+    },
+    {
+      q: 'Un taux de présence de 95 % est-il inquiétant ?',
+      r: 'Pas en soi : sur une période de vingt jours, 95 % représente environ deux demi-journées d’absence par élève, ce qui correspond à une saison normale. Le chiffre devient un signal quand il baisse période après période, ou quand il masque de fortes disparités entre élèves.'
+    },
+    {
+      q: 'Pourquoi regarder la répartition et pas seulement la moyenne ?',
+      r: 'Deux classes à 93 % peuvent être très différentes : dans l’une, tous les élèves ont manqué quelques demi-journées ; dans l’autre, deux élèves ont manqué trois semaines. La moyenne est identique, la conduite à tenir n’a rien à voir. Le calcul par élève tranche la question.'
+    },
+    {
+      q: 'Comment comparer deux périodes de durée différente ?',
+      r: 'Par le pourcentage, jamais par le nombre brut d’absences : dix demi-journées manquées sur deux semaines et sur deux mois ne racontent pas la même chose. Le taux ramène les deux périodes à une base comparable.'
+    }
+  ]
+};
+
+/* La FAQ générale reste rattachée à l'accueil ; l'ancien nom est conservé pour
+   les pages qui n'ont pas encore de jeu propre. */
+const FAQ = FAQ_GENERALE;
+
+/* Identité du site. Pas de SearchAction : le site n'a pas de moteur de
+   recherche interne, et en déclarer un que Google ne trouverait pas serait une
+   fausse indication. */
+function siteJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.nomLong,
+    alternateName: ['Cahier d’Appel', 'Calcul cahier d’appel'],
+    url: `${SITE.origin}/`,
+    inLanguage: 'fr'
+  };
+}
+
+/* Le site est d'abord un outil de calcul : WebApplication décrit mieux ce qu'un
+   visiteur y fait que WebPage. Le prix zéro est déclaré explicitement, sinon
+   Google ne peut pas savoir que l'outil est gratuit. */
+function applicationJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Calculateur de cahier d’appel',
+    url: `${SITE.origin}/`,
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Tout navigateur web',
+    inLanguage: 'fr',
+    isAccessibleForFree: true,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+    featureList: [
+      'Pourcentage de présence et d’absence d’une classe',
+      'Calcul du taux d’absence élève par élève',
+      'Cumul des statistiques sur plusieurs périodes de l’année',
+      'Grille de registre d’appel mensuelle à imprimer'
+    ]
+  };
+}
+
+function faq(cle) {
+  const liste = FAQ_PAR_PAGE[cle];
+  if (!liste) throw new Error(`FAQ inconnue : ${cle}`);
+  return liste;
+}
+
+function faqHtml(cle) {
   return `<div class="faq">
-${FAQ.map((f) => `<details><summary>${f.q}</summary><p>${f.r}</p></details>`).join('\n')}
+${faq(cle).map((f) => `<details><summary>${f.q}</summary><p>${f.r}</p></details>`).join('\n')}
 </div>`;
 }
 
-function faqJsonLd() {
+function faqJsonLd(cle) {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: FAQ.map((f) => ({
+    mainEntity: faq(cle).map((f) => ({
       '@type': 'Question',
       name: f.q,
       acceptedAnswer: { '@type': 'Answer', text: f.r }
@@ -105,7 +332,7 @@ statistiques de fin d’année, deux outils dédiés :</p>
 </div>
 
 <h2>Questions fréquentes</h2>
-${faqHtml()}
+${faqHtml('accueil')}
 
 <h2>Aller plus loin</h2>
 <ul>
@@ -142,11 +369,11 @@ ${faqHtml()}
 
   return layout({
     path: '/',
-    title: 'Calcul cahier d’appel et registre d’appel : calculateur en ligne gratuit',
-    description: 'Calculateur gratuit de cahier d’appel et de registre d’appel : pourcentage de présence et d’absence de la classe, calcul par élève, statistiques de l’année. Pour les enseignants.',
+    title: 'Calcul cahier d’appel et registre d’appel : calculateur',
+    description: 'Calculateur gratuit de cahier d’appel et de registre d’appel : pourcentage de présence de la classe, calcul par élève, statistiques de l’année.',
     body,
     ogType: 'website',
-    jsonLd: [faqJsonLd()]
+    jsonLd: [siteJsonLd(), applicationJsonLd(), faqJsonLd('accueil')]
   });
 }
 
@@ -189,7 +416,7 @@ pourcentage individuel se calcule automatiquement, ainsi que la moyenne de la cl
 académie, en complément des statistiques globales de la classe.</p>
 
 <h2>Questions fréquentes</h2>
-${faqHtml()}
+${faqHtml('parEleve')}
 
 <script>
 (function () {
@@ -234,10 +461,10 @@ ${faqHtml()}
   return layout({
     path: '/par-eleve/',
     title: 'Calculer les absences par élève : pourcentage cahier d’appel',
-    description: 'Calcule le pourcentage de présence et d’absence de chaque élève individuellement dans le cahier d’appel, avec la moyenne de la classe. Gratuit, sans inscription.',
+    description: 'Calcule le pourcentage de présence et d’absence de chaque élève du cahier d’appel, avec la moyenne de la classe. Gratuit, sans inscription.',
     body,
     crumbs: [{ nom: 'Accueil', href: '/' }, { nom: 'Par élève', href: '/par-eleve/' }],
-    jsonLd: [faqJsonLd()]
+    jsonLd: [faqJsonLd('parEleve')]
   });
 }
 
@@ -275,7 +502,7 @@ période permet de vérifier une valeur suspecte, et de fournir le détail mensu
 demande, en plus du total annuel.</p>
 
 <h2>Questions fréquentes</h2>
-${faqHtml()}
+${faqHtml('statsAnnee')}
 
 <script>
 (function () {
@@ -324,11 +551,11 @@ ${faqHtml()}
 
   return layout({
     path: '/statistiques-annee/',
-    title: 'Calcul cahier d’appel statistiques année : cumul de fin d’année',
-    description: 'Cumule les demi-journées possibles et les absences de chaque mois pour obtenir les statistiques de l’année du cahier d’appel et le pourcentage de présence annuel.',
+    title: 'Cahier d’appel statistiques année : le cumul annuel',
+    description: 'Cumule les demi-journées possibles et les absences de chaque mois pour obtenir les statistiques de l’année et le pourcentage de présence annuel.',
     body,
     crumbs: [{ nom: 'Accueil', href: '/' }, { nom: 'Statistiques de l’année', href: '/statistiques-annee/' }],
-    jsonLd: [faqJsonLd()]
+    jsonLd: [faqJsonLd('statsAnnee')]
   });
 }
 
@@ -365,15 +592,15 @@ demi-journées), a cumulé <strong>18 demi-journées d’absence</strong> au tot
 <p><a href="/">Refaire ce calcul avec tes propres chiffres →</a></p>
 
 <h2>Questions fréquentes</h2>
-${faqHtml()}`;
+${faqHtml('formule')}`;
 
   return layout({
     path: '/formule-cahier-appel/',
-    title: 'Formule du cahier d’appel : calcul du pourcentage de présence expliqué',
+    title: 'Formule du cahier d’appel : le calcul du pourcentage',
     description: 'La méthode officielle pas à pas pour calculer le pourcentage de présence et d’absence du cahier d’appel, avec un exemple chiffré.',
     body,
     crumbs: [{ nom: 'Accueil', href: '/' }, { nom: 'La formule', href: '/formule-cahier-appel/' }],
-    jsonLd: [faqJsonLd()]
+    jsonLd: [faqJsonLd('formule')]
   });
 }
 
@@ -434,7 +661,7 @@ effectivement lieu entrent dans le calcul.</li>
 </ul>
 
 <h2>Questions fréquentes</h2>
-${faqHtml()}
+${faqHtml('remplir')}
 
 <p class="lede" style="margin-top:2em"><a href="/formule-cahier-appel/">Voir le détail de la formule et un exemple chiffré →</a></p>`;
 
@@ -444,7 +671,7 @@ ${faqHtml()}
     description: 'Comment remplir le cahier d’appel : ce qu’on note chaque demi-journée, comment compter absences et retards, et ce qu’il faut calculer en fin de mois et d’année.',
     body,
     crumbs: [{ nom: 'Accueil', href: '/' }, { nom: 'Remplir le cahier d’appel', href: '/remplir-cahier-appel/' }],
-    jsonLd: [faqJsonLd()]
+    jsonLd: [faqJsonLd('remplir')]
   });
 }
 
@@ -494,7 +721,7 @@ classe, le seul chiffre dont tu as besoin pour le calcul du pourcentage.</p>
 </div>
 
 <h2>Questions fréquentes</h2>
-${faqHtml()}
+${faqHtml('imprimer')}
 
 <script>
 (function () {
@@ -529,11 +756,11 @@ ${faqHtml()}
 
   return layout({
     path: '/registre-appel-imprimer/',
-    title: 'Registre d’appel à imprimer : grille mensuelle vierge gratuite',
-    description: 'Grille de registre d’appel journalier à imprimer gratuitement : matin et après-midi, nombre d’élèves et de jours au choix, total des demi-journées d’absence par élève.',
+    title: 'Registre d’appel à imprimer : grille mensuelle vierge',
+    description: 'Grille de registre d’appel journalier à imprimer gratuitement : matin et après-midi, effectif et nombre de jours au choix, total par élève.',
     body,
     crumbs: [{ nom: 'Accueil', href: '/' }, { nom: 'Registre à imprimer', href: '/registre-appel-imprimer/' }],
-    jsonLd: [faqJsonLd()]
+    jsonLd: [faqJsonLd('imprimer')]
   });
 }
 
@@ -589,15 +816,15 @@ journées au lieu de demi-journées. <a href="/formule-cahier-appel/">Le détail
 et <a href="/remplir-cahier-appel/">les erreurs fréquentes sont listées là</a>.</p>
 
 <h2>Questions fréquentes</h2>
-${faqHtml()}`;
+${faqHtml('registre')}`;
 
   return layout({
     path: '/calcul-registre-appel/',
-    title: 'Calcul du registre d’appel journalier : pourcentages et obligations',
-    description: 'Le registre d’appel journalier : ce qu’il doit contenir, qui le tient, combien de temps le conserver, et comment calculer les pourcentages de présence attendus par l’administration.',
+    title: 'Calcul du registre d’appel journalier : les pourcentages',
+    description: 'Ce que le registre d’appel journalier doit contenir, qui le tient, combien de temps le conserver, et comment calculer les pourcentages attendus.',
     body,
     crumbs: [{ nom: 'Accueil', href: '/' }, { nom: 'Registre d’appel', href: '/calcul-registre-appel/' }],
-    jsonLd: [faqJsonLd()]
+    jsonLd: [faqJsonLd('registre')]
   });
 }
 
@@ -660,15 +887,15 @@ demi-journée. Une <strong>sortie anticipée</strong> autorisée non plus. En re
 motif qui compte.</p>
 
 <h2>Questions fréquentes</h2>
-${faqHtml()}`;
+${faqHtml('absenteisme')}`;
 
   return layout({
     path: '/absenteisme-scolaire/',
-    title: 'Absentéisme scolaire : seuil des 4 demi-journées et procédure',
-    description: 'Absentéisme scolaire : le seuil de 4 demi-journées non justifiées par mois, la procédure de signalement étape par étape, et ce que le registre d’appel doit prouver.',
+    title: 'Absentéisme scolaire : le seuil des 4 demi-journées',
+    description: 'Le seuil de 4 demi-journées non justifiées par mois, la procédure de signalement étape par étape, et ce que le registre d’appel doit pouvoir prouver.',
     body,
     crumbs: [{ nom: 'Accueil', href: '/' }, { nom: 'Absentéisme scolaire', href: '/absenteisme-scolaire/' }],
-    jsonLd: [faqJsonLd()]
+    jsonLd: [faqJsonLd('absenteisme')]
   });
 }
 
@@ -728,15 +955,15 @@ précédent.</p>
 </div>
 
 <h2>Questions fréquentes</h2>
-${faqHtml()}`;
+${faqHtml('interpreter')}`;
 
   return layout({
     path: '/interpreter-taux-presence/',
     title: 'Taux de présence : comment l’interpréter et le comparer',
-    description: 'Comment lire un taux de présence de classe : ce que la moyenne cache, les ordres de grandeur, l’effet des périodes courtes et comment comparer deux mois correctement.',
+    description: 'Comment lire un taux de présence de classe : ce que la moyenne cache, les ordres de grandeur usuels et comment comparer deux mois sans se tromper.',
     body,
     crumbs: [{ nom: 'Accueil', href: '/' }, { nom: 'Interpréter le taux', href: '/interpreter-taux-presence/' }],
-    jsonLd: [faqJsonLd()]
+    jsonLd: [faqJsonLd('interpreter')]
   });
 }
 
@@ -755,7 +982,7 @@ officielles de ton académie avant un envoi administratif.</p>`;
   return layout({
     path: '/mentions-legales/',
     title: 'Mentions légales — Cahier d’Appel',
-    description: 'Informations légales du site Cahier d’Appel.',
+    description: 'Mentions légales de Cahier d’Appel : régime de publication, hébergeur et portée des calculateurs de pourcentage de présence proposés sur le site.',
     body,
     crumbs: [{ nom: 'Accueil', href: '/' }, { nom: 'Mentions légales', href: '/mentions-legales/' }]
   });
@@ -774,7 +1001,7 @@ moment depuis le pied de page.</p>`;
   return layout({
     path: '/confidentialite/',
     title: 'Confidentialité — Cahier d’Appel',
-    description: 'Politique de confidentialité du site Cahier d’Appel.',
+    description: 'Politique de confidentialité de Cahier d’Appel : aucune donnée de classe n’est envoyée sur un serveur, tout reste dans le navigateur de l’enseignant.',
     body,
     crumbs: [{ nom: 'Accueil', href: '/' }, { nom: 'Confidentialité', href: '/confidentialite/' }]
   });
@@ -815,6 +1042,32 @@ fs.writeFileSync(path.join(OUT, 'assets', 'favicon.svg'), favicon, 'utf8');
 
 const og = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"><rect width="1200" height="630" fill="#f5f5f7"/><rect x="0" y="0" width="1200" height="630" fill="none" stroke="#5856d6" stroke-width="16"/><text x="600" y="290" font-size="76" text-anchor="middle" fill="#1d1d1f" font-family="-apple-system,'Plus Jakarta Sans',sans-serif" font-weight="800">Cahier d’Appel</text><text x="600" y="365" font-size="30" text-anchor="middle" fill="#5856d6" font-family="-apple-system,'Plus Jakarta Sans',sans-serif" font-weight="600">Calcul du pourcentage de présence, gratuit et instantané</text></svg>`;
 fs.writeFileSync(path.join(OUT, 'assets', 'og-cahierdappel.svg'), og, 'utf8');
+
+/* ---------- Page 404 ----------
+   Sans ce fichier, Cloudflare Pages répond à une URL inconnue en servant
+   l'accueil avec un code 200. Google appelle cela un soft-404 et indexe
+   l'adresse fantôme comme un doublon de l'accueil. Hors sitemap et en noindex :
+   c'est une page de service, pas de contenu à référencer. */
+fs.writeFileSync(path.join(OUT, '404.html'), layout({
+  path: '/404.html',
+  title: 'Page introuvable — Cahier d’Appel',
+  description: 'Cette adresse ne correspond à aucune page du site. Accédez au calculateur de pourcentage de présence, au calcul par élève et au registre d’appel à imprimer.',
+  robots: 'noindex,follow',
+  crumbs: null,
+  body: `<h1>Page introuvable</h1>
+<p class="lede">Cette adresse ne correspond à aucune page du site. Voici les outils et les guides disponibles.</p>
+<ul class="liens-404">
+  <li><a href="/"><b>Le calculateur</b><span>Pourcentage de présence d’une classe, calcul immédiat</span></a></li>
+  <li><a href="/par-eleve/"><b>Calcul par élève</b><span>Le taux d’absence de chaque élève, un par ligne</span></a></li>
+  <li><a href="/statistiques-annee/"><b>Statistiques sur l’année</b><span>Le cumul période par période</span></a></li>
+  <li><a href="/registre-appel-imprimer/"><b>Registre à imprimer</b><span>Grille mensuelle vierge, prête à photocopier</span></a></li>
+  <li><a href="/remplir-cahier-appel/"><b>Comment le remplir</b><span>Le guide complet, cas particuliers compris</span></a></li>
+  <li><a href="/formule-cahier-appel/"><b>La formule officielle</b><span>Le calcul détaillé, étape par étape</span></a></li>
+  <li><a href="/calcul-registre-appel/"><b>Registre d’appel</b><span>Ce que l’administration attend exactement</span></a></li>
+  <li><a href="/absenteisme-scolaire/"><b>Absentéisme</b><span>Seuils, procédure et rôle de l’enseignant</span></a></li>
+  <li><a href="/interpreter-taux-presence/"><b>Lire un taux</b><span>À partir de quand un chiffre doit alerter</span></a></li>
+</ul>`
+}), 'utf8');
 
 /* ---------- robots.txt + sitemap.xml ---------- */
 fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${url('/sitemap.xml')}\n`, 'utf8');
