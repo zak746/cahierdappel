@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=mutzi1s2">
+<link rel="stylesheet" href="/assets/site.css?v=muu27bvk">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <script>(function(){try{var t=localStorage.getItem('cahierdappel-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5665574369534333" crossorigin="anonymous"></script>
@@ -107,6 +107,46 @@ statistiques de fin d’année, deux outils dédiés :</p>
   <a class="calc-btn secondaire" href="/statistiques-annee/">Statistiques de l’année →</a>
 </div>
 
+<h2>Comment utiliser le calculateur du cahier d’appel</h2>
+<p>Trois chiffres suffisent, tous présents dans ton cahier ou ton registre d’appel :</p>
+<ol>
+<li><strong>Le nombre d’élèves inscrits</strong> dans la classe sur la période (élèves arrivés ou partis en
+cours de mois : voir plus bas).</li>
+<li><strong>Le nombre de demi-journées de classe</strong> sur la période : une journée de classe compte pour
+deux demi-journées, une matinée seule (le mercredi par exemple) pour une seule.</li>
+<li><strong>Le total des demi-journées d’absence</strong> de tous les élèves, justifiées ou non.</li>
+</ol>
+<p>Le calculateur donne alors les demi-journées possibles, les présences réelles, le pourcentage
+d’absence et le pourcentage de présence. Ce sont les chiffres demandés en bas de page du cahier d’appel
+ou dans le relevé mensuel envoyé à la direction.</p>
+
+<h2>Exemple : un mois de classe en élémentaire</h2>
+<p>Une classe de CM1 de <strong>24 élèves</strong> a eu classe <strong>16 jours</strong> en novembre, dont
+quatre mercredis matin. Cela fait 12 journées complètes (24 demi-journées) et 4 matinées
+(4 demi-journées), soit <strong>28 demi-journées</strong> de classe. Les absences cumulées du mois
+s’élèvent à <strong>21 demi-journées</strong>.</p>
+<ul>
+<li>Demi-journées possibles : 24 × 28 = <strong>672</strong></li>
+<li>Présences réelles : 672 − 21 = <strong>651</strong></li>
+<li>Pourcentage d’absence : 21 ÷ 672 × 100 = <strong>3,1 %</strong></li>
+<li>Pourcentage de présence : <strong>96,9 %</strong></li>
+</ul>
+
+<h2>Les cas particuliers à ne pas oublier</h2>
+<ul>
+<li><strong>Élève arrivé en cours de mois</strong> : il ne compte que pour les demi-journées où il était
+inscrit. Le plus simple est de calculer ses demi-journées possibles à part, puis de les ajouter au total
+(le <a href="/statistiques-annee/">cumul sur plusieurs périodes</a> le fait automatiquement).</li>
+<li><strong>Sortie scolaire ou classe transplantée</strong> : l’élève qui y participe est présent ; celui
+qui reste à la maison sans motif est absent.</li>
+<li><strong>Retard</strong> : un retard n’est pas une absence. Il se note à part et ne change pas le
+pourcentage.</li>
+<li><strong>Jour de grève sans accueil</strong> : la demi-journée n’est pas une demi-journée de classe pour
+les élèves concernés ; elle ne doit pas être comptée comme possible.</li>
+</ul>
+<p>Pour la méthode détaillée, lis <a href="/formule-cahier-appel/">la formule du cahier d’appel</a> ;
+pour suivre chaque enfant, utilise le <a href="/par-eleve/">calcul par élève</a>.</p>
+
 <h2>Questions fréquentes</h2>
 <div class="faq">
 <details><summary>Comment calculer le pourcentage de présence dans le cahier d’appel ?</summary><p>On divise le nombre de demi-journées de présence réelle par le nombre de demi-journées possibles (nombre d’élèves × nombre de demi-journées de la période), puis on multiplie par 100. On peut aussi faire 100 − le pourcentage d’absence.</p></details>
@@ -149,6 +189,19 @@ statistiques de fin d’année, deux outils dédiés :</p>
   calc();
 })();
 </script>
+<section class="a-lire" aria-labelledby="a-lire-titre">
+<h2 id="a-lire-titre">À lire aussi</h2>
+<ul>
+<li><a href="/par-eleve/">Calculer les absences par élève</a></li>
+<li><a href="/statistiques-annee/">Faire les statistiques de l’année</a></li>
+<li><a href="/formule-cahier-appel/">La formule du cahier d’appel</a></li>
+<li><a href="/remplir-cahier-appel/">Comment remplir le cahier d’appel</a></li>
+<li><a href="/calcul-registre-appel/">Le calcul du registre d’appel journalier</a></li>
+<li><a href="/absenteisme-scolaire/">Absentéisme scolaire : seuils et procédure</a></li>
+<li><a href="/interpreter-taux-presence/">Interpréter un taux de présence</a></li>
+<li><a href="/registre-appel-imprimer/">Registre d’appel à imprimer</a></li>
+</ul>
+</section>
 </main>
 </div>
 <div class="shell">

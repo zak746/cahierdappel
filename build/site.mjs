@@ -1,3 +1,4 @@
+import { aLireAussi } from './contenu-plus.mjs';
 /** Configuration commune + gabarit des pages statiques — Cahier d'Appel. */
 
 export const SITE = {
@@ -224,6 +225,7 @@ ${PUB_HTML}
 <main class="site" id="contenu">
 ${breadcrumbHtml(o.crumbs)}
 ${o.body}
+${aLireAussi(o.path)}
 </main>
 </div>
 <div class="shell">

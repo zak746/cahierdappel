@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=mutzi1s2">
+<link rel="stylesheet" href="/assets/site.css?v=muu27bvk">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <script>(function(){try{var t=localStorage.getItem('cahierdappel-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5665574369534333" crossorigin="anonymous"></script>
@@ -97,6 +97,33 @@ demi-journées), a cumulé <strong>18 demi-journées d’absence</strong> au tot
 </ul>
 <p><a href="/">Refaire ce calcul avec tes propres chiffres →</a></p>
 
+<h2>Comment calculer les présences possibles dans le mois</h2>
+<p>Les présences possibles (ou demi-journées possibles) du mois se calculent en deux temps :</p>
+<ol>
+<li><strong>Compter les demi-journées de classe du mois</strong> : 2 par journée complète, 1 par matinée
+seule, 0 pour les jours fériés, les vacances et les ponts sans classe.</li>
+<li><strong>Multiplier par le nombre d’élèves inscrits</strong>. Si l’effectif a changé en cours de mois,
+calcule chaque élève à part pour la durée de son inscription, puis additionne.</li>
+</ol>
+<p>Exemple : 25 élèves, 18 jours de classe dont 4 mercredis matin, soit 14 journées complètes
+(28 demi-journées) et 4 matinées (4 demi-journées), soit 32 demi-journées. Présences possibles :
+25 × 32 = <strong>800</strong>. Avec 24 demi-journées d’absence, les présences réelles sont de
+<strong>776</strong>, soit <strong>97 % de présence</strong>.</p>
+
+<h2>Les erreurs les plus fréquentes</h2>
+<ul>
+<li><strong>Compter les journées au lieu des demi-journées</strong> : le résultat est alors divisé par deux
+et le pourcentage d’absence est faux.</li>
+<li><strong>Oublier un jour férié ou un pont</strong> : les demi-journées possibles sont surestimées et le
+taux d’absence paraît plus faible qu’il ne l’est.</li>
+<li><strong>Compter les retards comme des absences</strong> : un retard se note mais n’entre pas dans le
+calcul.</li>
+<li><strong>Faire la moyenne des pourcentages de plusieurs mois</strong> : il faut additionner les
+demi-journées (voir les <a href="/statistiques-annee/">statistiques de l’année</a>).</li>
+</ul>
+<p>Pour le registre tenu chaque jour et ce que l’administration attend, lis aussi
+<a href="/calcul-registre-appel/">le calcul du registre d’appel journalier</a>.</p>
+
 <h2>Questions fréquentes</h2>
 <div class="faq">
 <details><summary>Quelle est la formule du pourcentage de présence ?</summary><p>Pourcentage de présence = (demi-journées possibles − demi-journées d’absence) ÷ demi-journées possibles × 100. Les demi-journées possibles valent : nombre d’élèves × nombre de demi-journées de classe de la période.</p></details>
@@ -105,6 +132,19 @@ demi-journées), a cumulé <strong>18 demi-journées d’absence</strong> au tot
 <details><summary>Une journée entière d’absence compte pour combien ?</summary><p>Pour deux demi-journées. C’est l’erreur de calcul la plus fréquente : compter une journée pour une unité divise le taux d’absence par deux.</p></details>
 <details><summary>Comment vérifier que mon résultat est cohérent ?</summary><p>Deux contrôles simples : le taux de présence et le taux d’absence doivent totaliser 100, et le nombre de demi-journées d’absence ne peut jamais dépasser le nombre de demi-journées possibles. Si l’un des deux échoue, l’erreur porte sur le nombre de demi-journées de la période.</p></details>
 </div>
+<section class="a-lire" aria-labelledby="a-lire-titre">
+<h2 id="a-lire-titre">À lire aussi</h2>
+<ul>
+<li><a href="/">Calculer le pourcentage de présence d’une classe</a></li>
+<li><a href="/par-eleve/">Calculer les absences par élève</a></li>
+<li><a href="/statistiques-annee/">Faire les statistiques de l’année</a></li>
+<li><a href="/remplir-cahier-appel/">Comment remplir le cahier d’appel</a></li>
+<li><a href="/calcul-registre-appel/">Le calcul du registre d’appel journalier</a></li>
+<li><a href="/absenteisme-scolaire/">Absentéisme scolaire : seuils et procédure</a></li>
+<li><a href="/interpreter-taux-presence/">Interpréter un taux de présence</a></li>
+<li><a href="/registre-appel-imprimer/">Registre d’appel à imprimer</a></li>
+</ul>
+</section>
 </main>
 </div>
 <div class="shell">

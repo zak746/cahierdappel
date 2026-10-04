@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=mutzi1s2">
+<link rel="stylesheet" href="/assets/site.css?v=muu27bvk">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <script>(function(){try{var t=localStorage.getItem('cahierdappel-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5665574369534333" crossorigin="anonymous"></script>
@@ -98,6 +98,32 @@ absences) : le cumul et le pourcentage annuel se calculent automatiquement.</p>
 période permet de vérifier une valeur suspecte, et de fournir le détail mensuel si l’administration le
 demande, en plus du total annuel.</p>
 
+<h2>Pourquoi cumuler les demi-journées plutôt que faire la moyenne des pourcentages ?</h2>
+<p>C’est l’erreur la plus fréquente dans les bilans annuels. Les mois n’ont pas le même nombre de
+demi-journées de classe : septembre, décembre ou avril en comptent moins à cause des vacances. Faire la
+moyenne des pourcentages mensuels donne autant de poids à un mois de 20 demi-journées qu’à un mois
+de 40, ce qui fausse le résultat.</p>
+<p>La bonne méthode consiste à additionner les <strong>demi-journées possibles</strong> de chaque période d’un
+côté, les <strong>demi-journées d’absence</strong> de l’autre, puis à calculer un seul pourcentage sur les
+totaux. C’est exactement ce que fait le calculateur ci-dessus.</p>
+
+<h2>Exemple sur un trimestre</h2>
+<ul>
+<li>Septembre : 600 demi-journées possibles, 9 absences (1,5 %)</li>
+<li>Octobre : 750 demi-journées possibles, 30 absences (4 %)</li>
+<li>Novembre : 700 demi-journées possibles, 14 absences (2 %)</li>
+</ul>
+<p>La moyenne des trois pourcentages donnerait 2,5 %. Le vrai taux d’absence du trimestre est de
+53 ÷ 2 050 × 100 = <strong>2,6 %</strong>, soit <strong>97,4 % de présence</strong>. L’écart paraît faible ici, mais il
+devient important quand un mois très court a un taux élevé.</p>
+
+<h2>Que faire de ces statistiques ?</h2>
+<p>Le bilan annuel sert au conseil d’école ou au conseil de classe, au rapport d’activité de l’école et
+au suivi de l’absentéisme. Compare surtout l’évolution d’une période à l’autre : une hausse régulière
+au même moment de l’année (fin de trimestre, veille de vacances) se repère mieux sur les cumuls que sur
+un seul mois. Pour remplir le relevé de chaque mois, commence par le
+<a href="/">calculateur de la classe</a>, puis reporte les totaux ici.</p>
+
 <h2>Questions fréquentes</h2>
 <div class="faq">
 <details><summary>Comment cumuler les pourcentages de présence de plusieurs périodes ?</summary><p>On n’additionne pas les pourcentages et on n’en fait pas la moyenne : cela fausse le résultat dès que les périodes n’ont pas la même durée. On additionne les demi-journées d’absence d’un côté, les demi-journées possibles de l’autre, et on calcule le pourcentage une seule fois sur ces deux totaux.</p></details>
@@ -150,6 +176,19 @@ demande, en plus du total annuel.</p>
   recalc();
 })();
 </script>
+<section class="a-lire" aria-labelledby="a-lire-titre">
+<h2 id="a-lire-titre">À lire aussi</h2>
+<ul>
+<li><a href="/">Calculer le pourcentage de présence d’une classe</a></li>
+<li><a href="/par-eleve/">Calculer les absences par élève</a></li>
+<li><a href="/formule-cahier-appel/">La formule du cahier d’appel</a></li>
+<li><a href="/remplir-cahier-appel/">Comment remplir le cahier d’appel</a></li>
+<li><a href="/calcul-registre-appel/">Le calcul du registre d’appel journalier</a></li>
+<li><a href="/absenteisme-scolaire/">Absentéisme scolaire : seuils et procédure</a></li>
+<li><a href="/interpreter-taux-presence/">Interpréter un taux de présence</a></li>
+<li><a href="/registre-appel-imprimer/">Registre d’appel à imprimer</a></li>
+</ul>
+</section>
 </main>
 </div>
 <div class="shell">

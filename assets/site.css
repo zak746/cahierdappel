@@ -73,6 +73,9 @@ li{margin:.35em 0}
 .callout p:last-child{margin-bottom:0}
 
 /* Grille de rattrapage de la page 404. */
+.a-lire{margin:48px 0 8px;padding-top:28px;border-top:1px solid var(--line)}
+.a-lire ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:14px 0 0;padding:0;list-style:none}
+.a-lire a{display:block;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--card);color:var(--ink);text-decoration:none;font-weight:600}
 .liens-404{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:28px 0;padding:0;list-style:none}
 .liens-404 li{margin:0}
 .liens-404 a{display:block;height:100%;padding:20px 22px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--card);color:var(--ink);text-decoration:none}

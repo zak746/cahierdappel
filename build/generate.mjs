@@ -4,6 +4,7 @@
  *   node build/generate.mjs
  */
 import fs from 'node:fs';
+import { PLUS } from './contenu-plus.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SITE, url, layout, CSS, BUILD_ID } from './site.mjs';
@@ -331,6 +332,8 @@ statistiques de fin d’année, deux outils dédiés :</p>
   <a class="calc-btn secondaire" href="/statistiques-annee/">Statistiques de l’année →</a>
 </div>
 
+${PLUS.accueil}
+
 <h2>Questions fréquentes</h2>
 ${faqHtml('accueil')}
 
@@ -414,6 +417,8 @@ pourcentage individuel se calcule automatiquement, ainsi que la moyenne de la cl
 <p>Le calcul global de la classe masque parfois des situations individuelles préoccupantes. Le suivi par
 élève permet de repérer tôt un absentéisme récurrent et de le signaler selon la procédure de ton
 académie, en complément des statistiques globales de la classe.</p>
+
+${PLUS.parEleve}
 
 <h2>Questions fréquentes</h2>
 ${faqHtml('parEleve')}
@@ -500,6 +505,8 @@ absences) : le cumul et le pourcentage annuel se calculent automatiquement.</p>
 <p>La plupart des enseignants remplissent leur registre d’appel chaque fin de mois. Garder le détail par
 période permet de vérifier une valeur suspecte, et de fournir le détail mensuel si l’administration le
 demande, en plus du total annuel.</p>
+
+${PLUS.statsAnnee}
 
 <h2>Questions fréquentes</h2>
 ${faqHtml('statsAnnee')}
@@ -590,6 +597,8 @@ demi-journées), a cumulé <strong>18 demi-journées d’absence</strong> au tot
 <li>% de présence : 100 − 1,8 = <strong>98,2 %</strong></li>
 </ul>
 <p><a href="/">Refaire ce calcul avec tes propres chiffres →</a></p>
+
+${PLUS.formule}
 
 <h2>Questions fréquentes</h2>
 ${faqHtml('formule')}`;
@@ -719,6 +728,8 @@ classe, le seul chiffre dont tu as besoin pour le calcul du pourcentage.</p>
   <a class="calc-btn" href="/">Calculer le pourcentage du mois →</a>
   <a class="calc-btn secondaire" href="/remplir-cahier-appel/">Comment remplir le registre →</a>
 </div>
+
+${PLUS.imprimer}
 
 <h2>Questions fréquentes</h2>
 ${faqHtml('imprimer')}
@@ -995,9 +1006,20 @@ function pageConfidentialite() {
 ton navigateur : ils ne sont jamais envoyés à un serveur, ni enregistrés, ni partagés. Si tu recharges la
 page, les valeurs sont perdues — comme sur une calculatrice de bureau.</p>
 <h2>Cookies publicitaires</h2>
-<p>Si tu acceptes le bandeau de cookies, Google peut déposer des cookies publicitaires. Si tu refuses,
-aucun cookie publicitaire n’est déposé et le site fonctionne à l’identique. Tu peux changer d’avis à tout
-moment depuis le pied de page.</p>`;
+<p>Le site est gratuit et financé par la publicité, diffusée par <strong>Google AdSense</strong>. Pour les
+visiteurs de l’Espace économique européen, du Royaume-Uni et de la Suisse, le consentement est recueilli
+par le message de Google, une plateforme de gestion du consentement certifiée : tu peux
+<strong>autoriser</strong>, <strong>refuser</strong> ou <strong>choisir</strong> les finalités (annonces personnalisées, mesure
+d’audience publicitaire, etc.).</p>
+<p>Si tu refuses, Google peut afficher des annonces non personnalisées, sans cookie publicitaire de
+ciblage, et le site fonctionne à l’identique. Tu peux changer d’avis à tout moment avec le lien
+« Gérer mes cookies » en pied de page.</p>
+<h2>Google et ses partenaires</h2>
+<p>Google et ses partenaires publicitaires peuvent utiliser des cookies pour diffuser des annonces en
+fonction de tes visites sur ce site et sur d’autres sites. Pour en savoir plus et gérer tes préférences,
+consulte <a href="https://policies.google.com/technologies/partner-sites" rel="noopener">la façon dont
+Google utilise les données</a> et <a href="https://adssettings.google.com" rel="noopener">les paramètres des
+annonces Google</a>.</p>`;
   return layout({
     path: '/confidentialite/',
     title: 'Confidentialité — Cahier d’Appel',
