@@ -82,10 +82,13 @@ export const BOUTON_THEME = `<button class="theme-toggle" id="theme-toggle" type
           stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       </button>`;
 
-export const PUB = { client: '', slotGauche: '', slotDroite: '' };
+// Éditeur AdSense. Tant que les deux blocs latéraux n'existent pas, aucune
+// fausse annonce n'est affichée : seules les annonces automatiques d'AdSense
+// (activées depuis le compte) apparaissent.
+export const PUB = { client: 'ca-pub-5665574369534333', slotGauche: '', slotDroite: '' };
 const pubActive = () => Boolean(PUB.client && PUB.slotGauche && PUB.slotDroite);
 
-export const PUB_HTML = ['gauche', 'droite'].map((cote) => {
+export const PUB_HTML = !pubActive() ? '' : ['gauche', 'droite'].map((cote) => {
   const slot = cote === 'gauche' ? PUB.slotGauche : PUB.slotDroite;
   const contenu = pubActive()
     ? `<ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px"
@@ -102,100 +105,30 @@ export const PUB_HTML = ['gauche', 'droite'].map((cote) => {
 </aside>`;
 }).join('\n');
 
-export const SCRIPT_ADSENSE = '';
+// Code AdSense dans le <head> : requis pour la validation du site et pour les
+// annonces automatiques. Le consentement (EEE) est recueilli par le message
+// RGPD de Google (Confidentialité et messages, dans AdSense), une CMP certifiée.
+export const SCRIPT_ADSENSE = PUB.client
+  ? `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${PUB.client}" crossorigin="anonymous"></script>`
+  : '';
 
-export const CONSENTEMENT_HTML = `<div class="consent" id="consent" role="dialog"
-  aria-live="polite" aria-label="Consentement aux cookies publicitaires" hidden>
-  <div class="consent-txt">
-    <p class="consent-titre">Cookies publicitaires</p>
-    <p>Ce site est gratuit et financé par la publicité. Avec votre accord, Google dépose des
-    cookies pour afficher des annonces. Si vous refusez, aucun cookie publicitaire n’est déposé
-    et le site fonctionne à l’identique.
-    <a href="/confidentialite/">En savoir plus</a></p>
-  </div>
-  <div class="consent-btns">
-    <button type="button" class="consent-refus" data-consent="refuse">Refuser</button>
-    <button type="button" class="consent-ok" data-consent="accepte">Accepter</button>
-  </div>
-</div>`;
+// Consentement : message RGPD de Google (CMP certifiée), chargé par le code AdSense.
+// Le lien « Gérer mes cookies » rouvre ce message.
+export const CONSENTEMENT_HTML = '';
 
 export const SCRIPT_CONSENTEMENT = `<script>
-(function () {
-  var CLE = 'cahierdappel-consent';
-  var CLIENT = ${JSON.stringify(PUB.client || '')};
-  var banniere = document.getElementById('consent');
-  function lire() { try { return localStorage.getItem(CLE); } catch (e) { return null; } }
-  function chargerPub() {
-    if (!CLIENT || window.__pubChargee) return;
-    window.__pubChargee = true;
-    var s = document.createElement('script');
-    s.async = true;
-    s.crossOrigin = 'anonymous';
-    s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + CLIENT;
-    document.head.appendChild(s);
-    document.querySelectorAll('.adsbygoogle').forEach(function () {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    });
-  }
-  function afficher() { if (banniere) banniere.hidden = false; }
-  function masquer() { if (banniere) banniere.hidden = true; }
-  var choix = lire();
-  if (choix === 'accepte') chargerPub();
-  else if (choix !== 'refuse') afficher();
-  document.addEventListener('click', function (e) {
-    var b = e.target.closest && e.target.closest('[data-consent]');
-    if (b) {
-      var v = b.dataset.consent;
-      try { localStorage.setItem(CLE, v); } catch (err) {}
-      masquer();
-      if (v === 'accepte') chargerPub();
-      return;
-    }
-    if (e.target.closest && e.target.closest('#rouvrir-consentement, [data-rouvrir-consent]')) {
-      e.preventDefault();
-      try { localStorage.removeItem(CLE); } catch (err) {}
-      afficher();
-    }
-  });
-})();
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('#rouvrir-consentement, [data-rouvrir-consent]');
+  if (!a) return;
+  e.preventDefault();
+  window.googlefc = window.googlefc || {};
+  window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+  window.googlefc.callbackQueue.push(function () { window.googlefc.showRevocationMessage(); });
+});
 </script>`;
 
-export const SCRIPT_PUB = pubActive() ? '' : `<script>
-(function () {
-  var CREATIFS = [
-    { t: 'Emplacement libre',       s: 'Espace réservé à une annonce' },
-    { t: 'Votre annonce ici',       s: 'Format skyscraper 160 × 600' },
-    { t: 'Espace disponible',       s: 'Contactez-nous pour cet emplacement' },
-    { t: 'Publicité',               s: 'Emplacement de démonstration' }
-  ];
-  var PERIODE = 30;
-  var rails = document.querySelectorAll('[data-pub]');
-  if (!rails.length) return;
-  var i = Math.floor(Math.random() * CREATIFS.length);
-  var reste = PERIODE;
-  function peindre() {
-    rails.forEach(function (el, n) {
-      var c = CREATIFS[(i + n) % CREATIFS.length];
-      el.classList.add('pub-transition');
-      setTimeout(function () {
-        el.querySelector('.pub-titre').textContent = c.t;
-        el.querySelector('.pub-sous').textContent = c.s;
-        el.classList.remove('pub-transition');
-      }, 350);
-    });
-  }
-  function tic() {
-    reste--;
-    if (reste <= 0) { i++; peindre(); reste = PERIODE; }
-    document.querySelectorAll('[data-pub-compteur]').forEach(function (el) {
-      el.textContent = 'actualisation dans ' + reste + ' s';
-    });
-  }
-  peindre();
-  tic();
-  setInterval(tic, 1000);
-})();
-</script>`;
+// Plus de fausses annonces : les emplacements restent vides tant qu'aucun bloc n'existe.
+export const SCRIPT_PUB = '';
 
 export const SCRIPT_THEME_INLINE =
   `<script>(function(){try{var t=localStorage.getItem('cahierdappel-theme');` +

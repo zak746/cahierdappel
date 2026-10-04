@@ -23,47 +23,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=msxihva5">
+<link rel="stylesheet" href="/assets/site.css?v=mutzi1s2">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <script>(function(){try{var t=localStorage.getItem('cahierdappel-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5665574369534333" crossorigin="anonymous"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://cahierdappel.fr/"},{"@type":"ListItem","position":2,"name":"Absentéisme scolaire","item":"https://cahierdappel.fr/absenteisme-scolaire/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"À partir de combien d’absences parle-t-on d’absentéisme ?","acceptedAnswer":{"@type":"Answer","text":"Le seuil de référence est de quatre demi-journées d’absence sans motif légitime dans le même mois. En dessous, l’enseignant relance la famille ; au-delà, la situation est signalée à la direction, qui engage la procédure."}},{"@type":"Question","name":"Les absences justifiées comptent-elles dans le seuil ?","acceptedAnswer":{"@type":"Answer","text":"Non. Seules les absences sans motif légitime entrent dans le décompte des quatre demi-journées. Une maladie signalée par la famille reste une absence dans le taux de présence, mais elle ne déclenche pas la procédure."}},{"@type":"Question","name":"Quel est le rôle de l’enseignant dans la procédure ?","acceptedAnswer":{"@type":"Answer","text":"Tenir l’appel et le registre, alerter la famille dès les premières absences répétées, et transmettre à la direction quand le seuil est atteint. La suite de la procédure relève de la direction et des services académiques, pas de l’enseignant seul."}},{"@type":"Question","name":"Que se passe-t-il après un signalement ?","acceptedAnswer":{"@type":"Answer","text":"La direction convoque la famille pour rappeler l’obligation d’assiduité et chercher une solution. Si les absences persistent, le dossier remonte aux services académiques, qui disposent de leurs propres moyens d’action. L’objectif reste le retour en classe, pas la sanction."}},{"@type":"Question","name":"Comment repérer un absentéisme qui s’installe ?","acceptedAnswer":{"@type":"Answer","text":"Le taux mensuel par élève est plus parlant que le taux de classe : il fait apparaître les absences répétées d’un seul enfant, que la moyenne de la classe dissimule. Un élève dont le taux d’absence monte de mois en mois mérite un signalement avant d’atteindre le seuil."}}]}</script>
 </head>
 <body>
 <a class="skip" href="#contenu">Aller au contenu</a>
-<div class="consent" id="consent" role="dialog"
-  aria-live="polite" aria-label="Consentement aux cookies publicitaires" hidden>
-  <div class="consent-txt">
-    <p class="consent-titre">Cookies publicitaires</p>
-    <p>Ce site est gratuit et financé par la publicité. Avec votre accord, Google dépose des
-    cookies pour afficher des annonces. Si vous refusez, aucun cookie publicitaire n’est déposé
-    et le site fonctionne à l’identique.
-    <a href="/confidentialite/">En savoir plus</a></p>
-  </div>
-  <div class="consent-btns">
-    <button type="button" class="consent-refus" data-consent="refuse">Refuser</button>
-    <button type="button" class="consent-ok" data-consent="accepte">Accepter</button>
-  </div>
-</div>
-<aside class="pub pub-gauche" aria-hidden="true" data-nosnippet>
-  <span class="pub-etiquette">Publicité</span>
-  <div class="pub-creatif" data-pub="gauche">
-    <span class="pub-titre">Emplacement libre</span>
-    <span class="pub-sous">Espace réservé à une annonce</span>
-  </div>
-  <span class="pub-format">160 × 600</span>
-  <span class="pub-compteur" data-pub-compteur="gauche"></span>
-</aside>
-<aside class="pub pub-droite" aria-hidden="true" data-nosnippet>
-  <span class="pub-etiquette">Publicité</span>
-  <div class="pub-creatif" data-pub="droite">
-    <span class="pub-titre">Emplacement libre</span>
-    <span class="pub-sous">Espace réservé à une annonce</span>
-  </div>
-  <span class="pub-format">160 × 600</span>
-  <span class="pub-compteur" data-pub-compteur="droite"></span>
-</aside>
+
+
 <div class="shell">
 <header class="site">
   <div class="site-nav-row">
@@ -229,80 +199,15 @@ document.addEventListener('click', function (e) {
 });
 </script>
 <script>
-(function () {
-  var CLE = 'cahierdappel-consent';
-  var CLIENT = "";
-  var banniere = document.getElementById('consent');
-  function lire() { try { return localStorage.getItem(CLE); } catch (e) { return null; } }
-  function chargerPub() {
-    if (!CLIENT || window.__pubChargee) return;
-    window.__pubChargee = true;
-    var s = document.createElement('script');
-    s.async = true;
-    s.crossOrigin = 'anonymous';
-    s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + CLIENT;
-    document.head.appendChild(s);
-    document.querySelectorAll('.adsbygoogle').forEach(function () {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    });
-  }
-  function afficher() { if (banniere) banniere.hidden = false; }
-  function masquer() { if (banniere) banniere.hidden = true; }
-  var choix = lire();
-  if (choix === 'accepte') chargerPub();
-  else if (choix !== 'refuse') afficher();
-  document.addEventListener('click', function (e) {
-    var b = e.target.closest && e.target.closest('[data-consent]');
-    if (b) {
-      var v = b.dataset.consent;
-      try { localStorage.setItem(CLE, v); } catch (err) {}
-      masquer();
-      if (v === 'accepte') chargerPub();
-      return;
-    }
-    if (e.target.closest && e.target.closest('#rouvrir-consentement, [data-rouvrir-consent]')) {
-      e.preventDefault();
-      try { localStorage.removeItem(CLE); } catch (err) {}
-      afficher();
-    }
-  });
-})();
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('#rouvrir-consentement, [data-rouvrir-consent]');
+  if (!a) return;
+  e.preventDefault();
+  window.googlefc = window.googlefc || {};
+  window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+  window.googlefc.callbackQueue.push(function () { window.googlefc.showRevocationMessage(); });
+});
 </script>
-<script>
-(function () {
-  var CREATIFS = [
-    { t: 'Emplacement libre',       s: 'Espace réservé à une annonce' },
-    { t: 'Votre annonce ici',       s: 'Format skyscraper 160 × 600' },
-    { t: 'Espace disponible',       s: 'Contactez-nous pour cet emplacement' },
-    { t: 'Publicité',               s: 'Emplacement de démonstration' }
-  ];
-  var PERIODE = 30;
-  var rails = document.querySelectorAll('[data-pub]');
-  if (!rails.length) return;
-  var i = Math.floor(Math.random() * CREATIFS.length);
-  var reste = PERIODE;
-  function peindre() {
-    rails.forEach(function (el, n) {
-      var c = CREATIFS[(i + n) % CREATIFS.length];
-      el.classList.add('pub-transition');
-      setTimeout(function () {
-        el.querySelector('.pub-titre').textContent = c.t;
-        el.querySelector('.pub-sous').textContent = c.s;
-        el.classList.remove('pub-transition');
-      }, 350);
-    });
-  }
-  function tic() {
-    reste--;
-    if (reste <= 0) { i++; peindre(); reste = PERIODE; }
-    document.querySelectorAll('[data-pub-compteur]').forEach(function (el) {
-      el.textContent = 'actualisation dans ' + reste + ' s';
-    });
-  }
-  peindre();
-  tic();
-  setInterval(tic, 1000);
-})();
-</script>
+
 </body>
 </html>

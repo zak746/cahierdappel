@@ -23,47 +23,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=msxihva5">
+<link rel="stylesheet" href="/assets/site.css?v=mutzi1s2">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <script>(function(){try{var t=localStorage.getItem('cahierdappel-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5665574369534333" crossorigin="anonymous"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://cahierdappel.fr/"},{"@type":"ListItem","position":2,"name":"Registre d’appel","item":"https://cahierdappel.fr/calcul-registre-appel/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Le registre d’appel journalier est-il obligatoire ?","acceptedAnswer":{"@type":"Answer","text":"Oui. L’appel se fait à chaque demi-journée de classe et doit être consigné. Le registre est le document qui atteste de cette obligation, et il peut être demandé par l’inspection comme en cas de litige avec une famille."}},{"@type":"Question","name":"Quelle différence entre cahier d’appel et registre d’appel ?","acceptedAnswer":{"@type":"Answer","text":"Aucune sur le fond : « registre d’appel journalier » est le terme administratif, « cahier d’appel » l’usage courant des enseignants. Le calcul du pourcentage de présence est identique dans les deux cas."}},{"@type":"Question","name":"Quels chiffres l’administration attend-elle exactement ?","acceptedAnswer":{"@type":"Answer","text":"Le plus souvent : l’effectif de la classe, le nombre de demi-journées d’absence de la période, et le pourcentage de présence qui en découle. Certaines circonscriptions demandent aussi la distinction entre absences justifiées et non justifiées."}},{"@type":"Question","name":"Combien de temps faut-il conserver le registre d’appel ?","acceptedAnswer":{"@type":"Answer","text":"Les registres se conservent plusieurs années au titre des archives de l’école ; la durée exacte est fixée par les instructions d’archivage applicables à votre académie. Ne jetez pas un registre en fin d’année sans avoir vérifié auprès de la direction."}}]}</script>
 </head>
 <body>
 <a class="skip" href="#contenu">Aller au contenu</a>
-<div class="consent" id="consent" role="dialog"
-  aria-live="polite" aria-label="Consentement aux cookies publicitaires" hidden>
-  <div class="consent-txt">
-    <p class="consent-titre">Cookies publicitaires</p>
-    <p>Ce site est gratuit et financé par la publicité. Avec votre accord, Google dépose des
-    cookies pour afficher des annonces. Si vous refusez, aucun cookie publicitaire n’est déposé
-    et le site fonctionne à l’identique.
-    <a href="/confidentialite/">En savoir plus</a></p>
-  </div>
-  <div class="consent-btns">
-    <button type="button" class="consent-refus" data-consent="refuse">Refuser</button>
-    <button type="button" class="consent-ok" data-consent="accepte">Accepter</button>
-  </div>
-</div>
-<aside class="pub pub-gauche" aria-hidden="true" data-nosnippet>
-  <span class="pub-etiquette">Publicité</span>
-  <div class="pub-creatif" data-pub="gauche">
-    <span class="pub-titre">Emplacement libre</span>
-    <span class="pub-sous">Espace réservé à une annonce</span>
-  </div>
-  <span class="pub-format">160 × 600</span>
-  <span class="pub-compteur" data-pub-compteur="gauche"></span>
-</aside>
-<aside class="pub pub-droite" aria-hidden="true" data-nosnippet>
-  <span class="pub-etiquette">Publicité</span>
-  <div class="pub-creatif" data-pub="droite">
-    <span class="pub-titre">Emplacement libre</span>
-    <span class="pub-sous">Espace réservé à une annonce</span>
-  </div>
-  <span class="pub-format">160 × 600</span>
-  <span class="pub-compteur" data-pub-compteur="droite"></span>
-</aside>
+
+
 <div class="shell">
 <header class="site">
   <div class="site-nav-row">
@@ -221,80 +191,15 @@ document.addEventListener('click', function (e) {
 });
 </script>
 <script>
-(function () {
-  var CLE = 'cahierdappel-consent';
-  var CLIENT = "";
-  var banniere = document.getElementById('consent');
-  function lire() { try { return localStorage.getItem(CLE); } catch (e) { return null; } }
-  function chargerPub() {
-    if (!CLIENT || window.__pubChargee) return;
-    window.__pubChargee = true;
-    var s = document.createElement('script');
-    s.async = true;
-    s.crossOrigin = 'anonymous';
-    s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + CLIENT;
-    document.head.appendChild(s);
-    document.querySelectorAll('.adsbygoogle').forEach(function () {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    });
-  }
-  function afficher() { if (banniere) banniere.hidden = false; }
-  function masquer() { if (banniere) banniere.hidden = true; }
-  var choix = lire();
-  if (choix === 'accepte') chargerPub();
-  else if (choix !== 'refuse') afficher();
-  document.addEventListener('click', function (e) {
-    var b = e.target.closest && e.target.closest('[data-consent]');
-    if (b) {
-      var v = b.dataset.consent;
-      try { localStorage.setItem(CLE, v); } catch (err) {}
-      masquer();
-      if (v === 'accepte') chargerPub();
-      return;
-    }
-    if (e.target.closest && e.target.closest('#rouvrir-consentement, [data-rouvrir-consent]')) {
-      e.preventDefault();
-      try { localStorage.removeItem(CLE); } catch (err) {}
-      afficher();
-    }
-  });
-})();
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('#rouvrir-consentement, [data-rouvrir-consent]');
+  if (!a) return;
+  e.preventDefault();
+  window.googlefc = window.googlefc || {};
+  window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+  window.googlefc.callbackQueue.push(function () { window.googlefc.showRevocationMessage(); });
+});
 </script>
-<script>
-(function () {
-  var CREATIFS = [
-    { t: 'Emplacement libre',       s: 'Espace réservé à une annonce' },
-    { t: 'Votre annonce ici',       s: 'Format skyscraper 160 × 600' },
-    { t: 'Espace disponible',       s: 'Contactez-nous pour cet emplacement' },
-    { t: 'Publicité',               s: 'Emplacement de démonstration' }
-  ];
-  var PERIODE = 30;
-  var rails = document.querySelectorAll('[data-pub]');
-  if (!rails.length) return;
-  var i = Math.floor(Math.random() * CREATIFS.length);
-  var reste = PERIODE;
-  function peindre() {
-    rails.forEach(function (el, n) {
-      var c = CREATIFS[(i + n) % CREATIFS.length];
-      el.classList.add('pub-transition');
-      setTimeout(function () {
-        el.querySelector('.pub-titre').textContent = c.t;
-        el.querySelector('.pub-sous').textContent = c.s;
-        el.classList.remove('pub-transition');
-      }, 350);
-    });
-  }
-  function tic() {
-    reste--;
-    if (reste <= 0) { i++; peindre(); reste = PERIODE; }
-    document.querySelectorAll('[data-pub-compteur]').forEach(function (el) {
-      el.textContent = 'actualisation dans ' + reste + ' s';
-    });
-  }
-  peindre();
-  tic();
-  setInterval(tic, 1000);
-})();
-</script>
+
 </body>
 </html>

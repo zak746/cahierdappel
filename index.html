@@ -23,48 +23,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=msxihva5">
+<link rel="stylesheet" href="/assets/site.css?v=mutzi1s2">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <script>(function(){try{var t=localStorage.getItem('cahierdappel-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5665574369534333" crossorigin="anonymous"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Cahier d’Appel — calcul des statistiques de présence","alternateName":["Cahier d’Appel","Calcul cahier d’appel"],"url":"https://cahierdappel.fr/","inLanguage":"fr"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de cahier d’appel","url":"https://cahierdappel.fr/","applicationCategory":"EducationalApplication","operatingSystem":"Tout navigateur web","inLanguage":"fr","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"featureList":["Pourcentage de présence et d’absence d’une classe","Calcul du taux d’absence élève par élève","Cumul des statistiques sur plusieurs périodes de l’année","Grille de registre d’appel mensuelle à imprimer"]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Comment calculer le pourcentage de présence dans le cahier d’appel ?","acceptedAnswer":{"@type":"Answer","text":"On divise le nombre de demi-journées de présence réelle par le nombre de demi-journées possibles (nombre d’élèves × nombre de demi-journées de la période), puis on multiplie par 100. On peut aussi faire 100 − le pourcentage d’absence."}},{"@type":"Question","name":"Comment calculer le pourcentage d’absence dans le cahier d’appel ?","acceptedAnswer":{"@type":"Answer","text":"On divise le nombre total de demi-journées d’absence par le nombre de demi-journées possibles, puis on multiplie par 100. Une journée d’absence complète compte pour 2 demi-journées."}},{"@type":"Question","name":"Qu’est-ce qu’une « demi-journée possible » ?","acceptedAnswer":{"@type":"Answer","text":"C’est le nombre d’élèves multiplié par le nombre de demi-journées de classe sur la période concernée (en général 2 demi-journées par jour d’école). C’est le nombre maximum théorique de présences si personne n’était absent."}},{"@type":"Question","name":"Faut-il compter les retards comme des absences ?","acceptedAnswer":{"@type":"Answer","text":"Non : un retard n’est pas une demi-journée d’absence tant que l’élève est bien présent en classe ce jour-là. Seule une absence complète sur la demi-journée doit être comptée."}},{"@type":"Question","name":"À quelle fréquence dois-je remplir ces statistiques ?","acceptedAnswer":{"@type":"Answer","text":"La plupart des académies demandent un calcul en fin de mois et un cumul en fin d’année scolaire. Utilisez l’outil « Statistiques de l’année » pour cumuler plusieurs périodes automatiquement."}},{"@type":"Question","name":"Cahier d’appel ou registre d’appel : quelle différence ?","acceptedAnswer":{"@type":"Answer","text":"Aucune différence de fond : « registre d’appel » (ou registre d’appel journalier) est le terme administratif officiel, « cahier d’appel » est le nom courant employé par les enseignants. Le calcul du pourcentage de présence est exactement le même dans les deux cas, et les calculateurs de ce site s’appliquent indifféremment à l’un ou à l’autre."}}]}</script>
 </head>
 <body>
 <a class="skip" href="#contenu">Aller au contenu</a>
-<div class="consent" id="consent" role="dialog"
-  aria-live="polite" aria-label="Consentement aux cookies publicitaires" hidden>
-  <div class="consent-txt">
-    <p class="consent-titre">Cookies publicitaires</p>
-    <p>Ce site est gratuit et financé par la publicité. Avec votre accord, Google dépose des
-    cookies pour afficher des annonces. Si vous refusez, aucun cookie publicitaire n’est déposé
-    et le site fonctionne à l’identique.
-    <a href="/confidentialite/">En savoir plus</a></p>
-  </div>
-  <div class="consent-btns">
-    <button type="button" class="consent-refus" data-consent="refuse">Refuser</button>
-    <button type="button" class="consent-ok" data-consent="accepte">Accepter</button>
-  </div>
-</div>
-<aside class="pub pub-gauche" aria-hidden="true" data-nosnippet>
-  <span class="pub-etiquette">Publicité</span>
-  <div class="pub-creatif" data-pub="gauche">
-    <span class="pub-titre">Emplacement libre</span>
-    <span class="pub-sous">Espace réservé à une annonce</span>
-  </div>
-  <span class="pub-format">160 × 600</span>
-  <span class="pub-compteur" data-pub-compteur="gauche"></span>
-</aside>
-<aside class="pub pub-droite" aria-hidden="true" data-nosnippet>
-  <span class="pub-etiquette">Publicité</span>
-  <div class="pub-creatif" data-pub="droite">
-    <span class="pub-titre">Emplacement libre</span>
-    <span class="pub-sous">Espace réservé à une annonce</span>
-  </div>
-  <span class="pub-format">160 × 600</span>
-  <span class="pub-compteur" data-pub-compteur="droite"></span>
-</aside>
+
+
 <div class="shell">
 <header class="site">
   <div class="site-nav-row">
@@ -247,80 +217,15 @@ document.addEventListener('click', function (e) {
 });
 </script>
 <script>
-(function () {
-  var CLE = 'cahierdappel-consent';
-  var CLIENT = "";
-  var banniere = document.getElementById('consent');
-  function lire() { try { return localStorage.getItem(CLE); } catch (e) { return null; } }
-  function chargerPub() {
-    if (!CLIENT || window.__pubChargee) return;
-    window.__pubChargee = true;
-    var s = document.createElement('script');
-    s.async = true;
-    s.crossOrigin = 'anonymous';
-    s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + CLIENT;
-    document.head.appendChild(s);
-    document.querySelectorAll('.adsbygoogle').forEach(function () {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    });
-  }
-  function afficher() { if (banniere) banniere.hidden = false; }
-  function masquer() { if (banniere) banniere.hidden = true; }
-  var choix = lire();
-  if (choix === 'accepte') chargerPub();
-  else if (choix !== 'refuse') afficher();
-  document.addEventListener('click', function (e) {
-    var b = e.target.closest && e.target.closest('[data-consent]');
-    if (b) {
-      var v = b.dataset.consent;
-      try { localStorage.setItem(CLE, v); } catch (err) {}
-      masquer();
-      if (v === 'accepte') chargerPub();
-      return;
-    }
-    if (e.target.closest && e.target.closest('#rouvrir-consentement, [data-rouvrir-consent]')) {
-      e.preventDefault();
-      try { localStorage.removeItem(CLE); } catch (err) {}
-      afficher();
-    }
-  });
-})();
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('#rouvrir-consentement, [data-rouvrir-consent]');
+  if (!a) return;
+  e.preventDefault();
+  window.googlefc = window.googlefc || {};
+  window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+  window.googlefc.callbackQueue.push(function () { window.googlefc.showRevocationMessage(); });
+});
 </script>
-<script>
-(function () {
-  var CREATIFS = [
-    { t: 'Emplacement libre',       s: 'Espace réservé à une annonce' },
-    { t: 'Votre annonce ici',       s: 'Format skyscraper 160 × 600' },
-    { t: 'Espace disponible',       s: 'Contactez-nous pour cet emplacement' },
-    { t: 'Publicité',               s: 'Emplacement de démonstration' }
-  ];
-  var PERIODE = 30;
-  var rails = document.querySelectorAll('[data-pub]');
-  if (!rails.length) return;
-  var i = Math.floor(Math.random() * CREATIFS.length);
-  var reste = PERIODE;
-  function peindre() {
-    rails.forEach(function (el, n) {
-      var c = CREATIFS[(i + n) % CREATIFS.length];
-      el.classList.add('pub-transition');
-      setTimeout(function () {
-        el.querySelector('.pub-titre').textContent = c.t;
-        el.querySelector('.pub-sous').textContent = c.s;
-        el.classList.remove('pub-transition');
-      }, 350);
-    });
-  }
-  function tic() {
-    reste--;
-    if (reste <= 0) { i++; peindre(); reste = PERIODE; }
-    document.querySelectorAll('[data-pub-compteur]').forEach(function (el) {
-      el.textContent = 'actualisation dans ' + reste + ' s';
-    });
-  }
-  peindre();
-  tic();
-  setInterval(tic, 1000);
-})();
-</script>
+
 </body>
 </html>
